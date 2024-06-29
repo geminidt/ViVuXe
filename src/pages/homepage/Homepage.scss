@@ -1,0 +1,54 @@
+.home-page {
+    background-color: #E0F4FF;
+    height: 100%;
+    width: 100vw;
+    padding-top: 20px;
+}
+
+.search-box {
+    background-color: white;
+    height: 140px;
+    width: 700px;
+    margin: 0 auto;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list {
+    margin-top: 30px;
+
+}
+
+
+.location-container {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    background-color: #E0F4FF;
+}
+
+.location-card {
+    margin-left: 20px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.pr-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.pr-content {
+    color: black;
+}
+
+.car-deliver {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}

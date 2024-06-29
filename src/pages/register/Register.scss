@@ -1,0 +1,71 @@
+.register-page {
+    background-color: aliceblue;
+    height: 100vh;
+    width: 100vw;
+    padding-top: 50px;
+    border-radius: 5px;
+}
+
+
+.background-image {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-container {
+    margin-left: 200px;
+    padding-top: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border-top-right-radius: 100px;
+    height: 280px;
+    width: 500px;
+    display: flex;
+    justify-content: center
+}
+
+.main-content {
+    height: 250px;
+    width: 320px;
+    background-color: white;
+    color: black;
+
+}
+
+.register-button {
+    margin-top: 10px;
+    height: 50px;
+    width: 250px;
+    background-color: black;
+}
+
+.pr {
+    margin-top: 10px;
+    color: black;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.card1-container {
+    margin-top: 30px;
+    margin-block: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: white;
+}
+
+.card2-container {
+    margin-top: 10px;
+    margin-block: 20px;
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+}
+
+.card {
+    background-color: #CFF1DB;
+    border-radius: 20px;
+}
