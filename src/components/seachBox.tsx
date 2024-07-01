@@ -1,6 +1,5 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
-import { AimOutlined, CalendarOutlined } from "@ant-design/icons";
 
 interface SearchBoxProps {
   onSearch: (searchCriteria: {
@@ -36,7 +35,6 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
               },
             ]}
           >
-            <AimOutlined />
             <Input placeholder="Địa điểm" />
           </Form.Item>
         </div>
@@ -51,7 +49,6 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
               },
             ]}
           >
-            <CalendarOutlined />
             <Input placeholder="Thời gian thuê" />
           </Form.Item>
         </div>
@@ -59,7 +56,9 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Form.Item>
           <Button type="primary" onClick={handleSearch}>
+            <div className="search-button" style={{color: 'black', fontSize: '30px', fontFamily: 'Quicksand', fontWeight: '500'}}>
             Tìm xe
+            </div>
           </Button>
         </Form.Item>
       </div>
