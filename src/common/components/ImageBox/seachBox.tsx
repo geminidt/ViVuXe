@@ -36,7 +36,6 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
               },
             ]}
           >
-            <AimOutlined />
             <Input placeholder="Địa điểm" />
           </Form.Item>
         </div>
@@ -51,7 +50,6 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
               },
             ]}
           >
-            <CalendarOutlined />
             <Input placeholder="Thời gian thuê" />
           </Form.Item>
         </div>
