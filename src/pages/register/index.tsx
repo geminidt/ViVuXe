@@ -1,7 +1,7 @@
 import "./Register.scss";
 import TPHCM from "../../assets/TPHCM.jpg";
-import Hanoi from "../../assets/Hanoi.jpg";
-import Danang from "../../assets/Danang.jpg";
+import Hoguom from "../../assets/Hoguom.jpg";
+import Bana from "../../assets/Bana.jpg";
 import Cantho from "../../assets/Cantho.jpg";
 // import TanSonNhat from "../../assets/TanSonNhat.webp";
 // import NoiBai from "../../assets/NoiBai.jpg";
@@ -26,14 +26,14 @@ const Register = () => {
     {
       id: 2,
       name: "Hanoi",
-      image: Hanoi,
+      image: Hoguom,
       annotation: "Hà Nội 2500+ xe",
     },
 
     {
       id: 3,
       name: "Danang",
-      image: Danang,
+      image: Bana,
       annotation: "Đà Nẵng 2000+ xe",
     },
 

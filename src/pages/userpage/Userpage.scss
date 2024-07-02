@@ -1,0 +1,22 @@
+@font-face {
+    font-family: Quicksand;
+    src: url(../../font/Quicksand/Quicksand-VariableFont_wght.ttf);
+  }
+  
+  .home-page {
+    background-color: #e0f4ff;
+    height: 100%;
+    width: 100vw;
+    padding-top: 20px;
+  }
+
+.wellcome-title {
+    color: black;
+    font-family: Quicksand;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.menu-container {
+    background-color: #e0f4ff;
+}
