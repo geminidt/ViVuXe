@@ -24,8 +24,8 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
 
   return (
     <Form form={form}>
-      <div style={{ display: "inline-flex" }}>
-        <div style={{ width: "340px", borderRight: "5px" }}>
+      <div style={{ display: "inline-flex"}}>
+        <div style={{ width: "345px", marginTop: "20px"}}>
           <Form.Item
             name="condition1"
             rules={[
@@ -39,7 +39,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
           </Form.Item>
         </div>
 
-        <div style={{ width: "340px" }}>
+        <div style={{ width: "345px", marginTop: "20px" }}>
           <Form.Item
             name="condition2"
             rules={[
@@ -53,7 +53,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
           </Form.Item>
         </div>
       </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
         <Form.Item>
           <Button type="primary" onClick={handleSearch}>
             <div className="search-button" style={{color: 'black', fontSize: '30px', fontFamily: 'Quicksand', fontWeight: '500'}}>
