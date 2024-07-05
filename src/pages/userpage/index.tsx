@@ -12,6 +12,7 @@ import {
 import type { MenuProps } from "antd";
 import { Menu, Card, Form, Button, Input } from "antd";
 import Header from "../../components/Header/index";
+import Goma from "../../assets/Goma.jpg";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -53,34 +54,79 @@ const Userpage = () => {
             <Menu
               style={{ backgroundColor: "#e0f4ff" }}
               defaultSelectedKeys={["1"]}
-              defaultOpenKeys={["sub1"]}
               mode="inline"
               items={items}
             />
           </div>
         </div>
         <div className="info-container">
-          <div className="info-card">
+          <div className="info-card" style={{position: "relative"}}>
             <Card style={{ width: 850, height: 350 }}>
-              <h3>
-                Thông tin tài khoản{" "}
-                <span>
-                  <button style={{backgroundColor: "white", color: "black"}}><FormOutlined /></button>
-                </span>
-              </h3>
-              <span>0 chuyến</span>
-              <img src="" alt="" />
-              <p>Goma</p>
-              <p>Tham gia 12/06/2024</p>
+              <div className="info-left" style={{marginLeft: "100px", marginTop: "20px"}}>
+                <h2>
+                  Thông tin tài khoản{" "}
+                  <span>
+                    <button
+                      style={{ backgroundColor: "white", color: "black" }}
+                    >
+                      <FormOutlined />
+                    </button>
+                  </span>
+                </h2>
+                <br />
+                <img
+                  src={Goma}
+                  alt="Goma"
+                  style={{ width: "100px", borderRadius: "50px", marginLeft: "50px" }}
+                />
+                <br />
+                <br />
+                <p style={{fontSize: "25px", marginLeft: "60px"}}>Goma</p>
+                <p style={{marginLeft: "25px"}}>Tham gia 12/06/2024</p>
+              </div>
+
+              <div className="info-right" style={{position: "absolute", left: "480px", bottom: "100px"}}>
+              <p style={{width: "100px", height: "50px", }}>0 chuyến</p>
+              <br />
+                <Card
+                  className="user-info"
+                  style={{
+                    backgroundColor: "grey",
+                    height: "80px",
+                    width: "350px",
+                  }}
+                >
+                  <p>Ngày sinh <span style={{marginLeft: "150px"}}>--/--/---- </span></p>
+                  <p>Giới tính <span style={{marginLeft: "160px"}}>Nam</span></p>
+                </Card>
+                <p>Số điện thoại <span>
+                    <button
+                      style={{ backgroundColor: "white", color: "black", marginLeft: "100px" }}
+                    >
+                      Thêm số điện thoại<FormOutlined />
+                    </button>
+                  </span></p>
+
+                  <p>Email <span>
+                    <button
+                      style={{ backgroundColor: "white", color: "black", marginLeft: "200px" }}
+                    >
+                      Thêm email<FormOutlined />
+                    </button>
+                  </span></p>
+              </div>
             </Card>
           </div>
 
           <div className="gplx-card">
-            <Card style={{ width: 850, height: 350 }}>
-              <div>
+            <Card style={{ width: 850, height: 450 }}>
+              <div className="gplx-card-title">
                 <h2 className="gplx-title">
                   Giấy phép lái xe{"       "}
-                  <span style={{ width: "50px" }}>
+                  <span
+                    className="edit-button"
+                    style={{ width: "50px", marginLeft: "400px" }}
+                  >
                     <button
                       style={{ backgroundColor: "white", color: "black" }}
                     >
@@ -88,6 +134,22 @@ const Userpage = () => {
                     </button>
                   </span>
                 </h2>
+              </div>
+
+              <div
+                className="warning"
+                style={{
+                  fontSize: "15px",
+                  backgroundColor: "#ffa1a1",
+                  color: "#ff1718",
+                  borderRadius: "10px",
+                }}
+              >
+                <p>
+                  Lưu ý: để tránh phát sinh vấn đề trong quá trình thuê xe,
+                  người đặt xe trên ViVuXe(Đã xác thực GPLX) ĐỒNG THỜI phải là
+                  người nhận xe
+                </p>
               </div>
 
               <div className="gplx-image">
