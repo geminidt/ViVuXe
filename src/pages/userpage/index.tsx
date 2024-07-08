@@ -11,7 +11,6 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu, Card, Form, Button, Input } from "antd";
-import Header from "../../components/Header/index";
 import Goma from "../../assets/Goma.jpg";
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -41,9 +40,6 @@ const onFinish = (values: unknown) => {
 const Userpage = () => {
   return (
     <div className="user-page">
-      <div className="header">
-        <Header />
-      </div>
       <div className="main-container">
         <div className="menu-container">
           <div>
@@ -60,15 +56,24 @@ const Userpage = () => {
           </div>
         </div>
         <div className="info-container">
-          <div className="info-card" style={{position: "relative"}}>
+          <div className="info-card" style={{ position: "relative" }}>
             <Card style={{ width: 850, height: 350 }}>
-              <div className="info-left" style={{marginLeft: "100px", marginTop: "20px"}}>
+              <div
+                className="info-left"
+                style={{ marginLeft: "100px", marginTop: "20px" }}
+              >
                 <h2>
                   Thông tin tài khoản{" "}
                   <span>
                     <button
-                      style={{ backgroundColor: "white", color: "black" }}
+                      style={{
+                        backgroundColor: "white",
+                        color: "black",
+                        marginLeft: "320px",
+                        border: "1px solid black",
+                      }}
                     >
+                      Chỉnh sửa
                       <FormOutlined />
                     </button>
                   </span>
@@ -77,139 +82,110 @@ const Userpage = () => {
                 <img
                   src={Goma}
                   alt="Goma"
-                  style={{ width: "100px", borderRadius: "50px", marginLeft: "50px" }}
+                  style={{
+                    width: "100px",
+                    borderRadius: "50px",
+                    marginLeft: "50px",
+                  }}
                 />
                 <br />
                 <br />
-                <p style={{fontSize: "25px", marginLeft: "60px"}}>Goma</p>
-                <p style={{marginLeft: "25px"}}>Tham gia 12/06/2024</p>
+                <p style={{ fontSize: "25px", marginLeft: "60px" }}>Goma</p>
+                <p style={{ marginLeft: "25px" }}>Tham gia 12/06/2024</p>
               </div>
 
-              <div className="info-right" style={{position: "absolute", left: "480px", bottom: "100px"}}>
-              <p style={{width: "100px", height: "50px", }}>0 chuyến</p>
-              <br />
+              <div
+                className="info-right"
+                style={{ position: "absolute", left: "480px", bottom: "30px" }}
+              >
+                <br />
                 <Card
                   className="user-info"
                   style={{
-                    backgroundColor: "grey",
-                    height: "80px",
+                    backgroundColor: "#D9D9D9",
+                    height: "220px",
                     width: "350px",
                   }}
                 >
-                  <p>Ngày sinh <span style={{marginLeft: "150px"}}>--/--/---- </span></p>
-                  <p>Giới tính <span style={{marginLeft: "160px"}}>Nam</span></p>
+                  <p>
+                    Họ và tên{" "}
+                    <span style={{ marginLeft: "130px" }}>Nguyễn Văn A </span>
+                  </p>
+                  <p>
+                    Ngày sinh{" "}
+                    <span style={{ marginLeft: "150px" }}>--/--/---- </span>
+                  </p>
+                  <p>
+                    Giới tính <span style={{ marginLeft: "180px" }}>Nam</span>
+                  </p>
+                  <p>
+                    Số điện thoại{" "}
+                    <span style={{ marginLeft: "120px" }}>0123456789</span>
+                  </p>
+                  <p>
+                    Email{" "}
+                    <span style={{ marginLeft: "150px" }}>abc@gmail.com</span>
+                  </p>
+                  <p>
+                    Số GPLX{" "}
+                    <span style={{ marginLeft: "140px" }}>12031ABC12312</span>
+                  </p>
                 </Card>
-                <p>Số điện thoại <span>
-                    <button
-                      style={{ backgroundColor: "white", color: "black", marginLeft: "100px" }}
-                    >
-                      Thêm số điện thoại<FormOutlined />
-                    </button>
-                  </span></p>
-
-                  <p>Email <span>
-                    <button
-                      style={{ backgroundColor: "white", color: "black", marginLeft: "200px" }}
-                    >
-                      Thêm email<FormOutlined />
-                    </button>
-                  </span></p>
               </div>
             </Card>
           </div>
 
-          <div className="gplx-card">
-            <Card style={{ width: 850, height: 450 }}>
-              <div className="gplx-card-title">
-                <h2 className="gplx-title">
-                  Giấy phép lái xe{"       "}
-                  <span
-                    className="edit-button"
-                    style={{ width: "50px", marginLeft: "400px" }}
-                  >
-                    <button
-                      style={{ backgroundColor: "white", color: "black" }}
-                    >
-                      Chỉnh sửa <FormOutlined />
-                    </button>
-                  </span>
-                </h2>
+          <div className="change-pass-card">
+            <Card style={{ width: 850, height: 350 }}>
+              <div className="change-pass-title">
+                <h2 className="change-pass-title">Đổi mật khẩu</h2>
               </div>
 
-              <div
-                className="warning"
-                style={{
-                  fontSize: "15px",
-                  backgroundColor: "#ffa1a1",
-                  color: "#ff1718",
-                  borderRadius: "10px",
-                }}
-              >
-                <p>
-                  Lưu ý: để tránh phát sinh vấn đề trong quá trình thuê xe,
-                  người đặt xe trên ViVuXe(Đã xác thực GPLX) ĐỒNG THỜI phải là
-                  người nhận xe
-                </p>
-              </div>
-
-              <div className="gplx-image">
-                <img src="" alt="" />
-              </div>
-
-              <div className="gplx-input">
+              <div className="change-pass-input">
                 <Form
-                  className="gplx-form"
+                  className="change-pass-form"
                   initialValues={{
                     remember: true,
                   }}
                   onFinish={onFinish}
                 >
-                  <h3>Thông tin chung</h3>
-                  <p>Số GPLX</p>
+                  <p>Mật khẩu hiện tại</p>
                   <Form.Item
-                    name="GPLX-number"
+                    name="now-pass"
                     rules={[
                       {
                         required: true,
-                        message: "Hãy điền số GPLX được cấp vào!",
+                        message: "Xin hãy điền vào mật khẩu hiện tại!",
                       },
                     ]}
                   >
-                    <Input
-                      placeholder="Nhập số GPLX được cấp"
-                      style={{ width: "400px", backgroundColor: "grey" }}
-                    />
+                    <Input style={{ width: "400px" }} />
                   </Form.Item>
 
-                  <p>Họ và tên</p>
+                  <p>Mật khẩu mới</p>
                   <Form.Item
-                    name="name"
+                    name="new-pass"
                     rules={[
                       {
                         required: true,
-                        message: "Hãy điền họ và tên vào!",
+                        message: "Xin hãy điền mật khẩu mới vào!",
                       },
                     ]}
                   >
-                    <Input
-                      placeholder="Nhập đầy đủ họ và tên"
-                      style={{ width: "400px", backgroundColor: "grey" }}
-                    />
+                    <Input style={{ width: "400px" }} />
                   </Form.Item>
 
-                  <p>Ngày sinh</p>
+                  <p>Xác nhận mật khẩu mới</p>
                   <Form.Item
-                    name="date-of- birth"
+                    name="reinput-pass"
                     rules={[
                       {
                         required: true,
-                        message: "Hãy điền ngày sinh vào!",
+                        message: "Xin hãy nhập lại mật khẩu mới!",
                       },
                     ]}
                   >
-                    <Input
-                      style={{ width: "400px", backgroundColor: "grey" }}
-                    />
+                    <Input style={{ width: "400px" }} />
                   </Form.Item>
 
                   <Form.Item>

@@ -4,6 +4,7 @@ import Signin from "../pages/signin";
 import Login from "../pages/login";
 import Homepage from "../pages/homepage";
 import Userpage from "../pages/userpage";
+import CarRegister from "../pages/carRegister";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
       {
         path: "userpage",
         element: <Userpage />,
+      },
+
+      {
+        path: "carregister",
+        element: <CarRegister />,
       },
   ]);
 
