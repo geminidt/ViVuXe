@@ -32,12 +32,12 @@ const ImageUpload: React.FC = () => {
 
   return (
 
-    // <form onSubmit={handleSubmit}>
-    //   <label htmlFor="file-upload">Upload an image:</label>
-    //   <input type="file" id="file-upload" accept="image/*" onChange={handleFileChange} />
-    //   {preview && <img src={preview} alt="Preview" width="200" />}
-    //   <input type="submit" value="Upload" />
-    // </form>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="file-upload">Upload an image:</label>
+      <input type="file" id="file-upload" accept="image/*" onChange={handleFileChange} />
+      {preview && <img src={preview} alt="Preview" width="200" />}
+      <input type="submit" value="Upload" />
+    </form>
 
    );
 };

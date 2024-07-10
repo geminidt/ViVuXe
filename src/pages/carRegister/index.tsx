@@ -1,16 +1,134 @@
 import React, { useState } from "react";
 import "./CarRegister.scss";
 import { LeftOutlined } from "@ant-design/icons";
+import {
+  MdAirlineSeatReclineExtra,
+  MdBluetoothSearching,
+  MdCameraRear,
+  MdGpsFixed,
+  MdOutlineSensors,
+  MdTireRepair,
+  MdVideoCameraBack,
+} from "react-icons/md";
 import { Card, Form, Button, Input } from "antd";
+import ToggleButton from "../../components/toggleButtonProps";
+import { FaCamera, FaMapMarkedAlt, FaTruckPickup } from "react-icons/fa";
+import { TbView360Number } from "react-icons/tb";
+import { IoIosSpeedometer } from "react-icons/io";
+import { GiFlatTire, GiRaceCar, GiTripleGate } from "react-icons/gi";
+import { CgUsb } from "react-icons/cg";
+import { LuMonitorPlay } from "react-icons/lu";
+import { FaCarBurst } from "react-icons/fa6";
 
+interface ToggleButton {
+  id: number;
+  icon: React.ReactNode;
+  name: string;
+}
 
+const toggleButtons: ToggleButton[] = [
+  {
+    id: 1,
+    icon: <FaMapMarkedAlt />,
+    name: "Bản đồ",
+  },
+  {
+    id: 2,
+    icon: <MdBluetoothSearching />,
+    name: "Bluetooth",
+  },
+  {
+    id: 3,
+    icon: <TbView360Number />,
+    name: "Camera 360",
+  },
+  {
+    id: 4,
+    icon: <FaCamera />,
+    name: "Camera cập lề",
+  },
+  {
+    id: 5,
+    icon: <MdVideoCameraBack />,
+    name: "Camera hành trình",
+  },
+  {
+    id: 6,
+    icon: <MdCameraRear />,
+    name: "Camera lùi",
+  },
+  {
+    id: 7,
+    icon: <MdTireRepair />,
+    name: "Cảm biến lốp",
+  },
+  {
+    id: 8,
+    icon: <MdOutlineSensors />,
+    name: "Cảm biến va chạm",
+  },
+  {
+    id: 9,
+    icon: <IoIosSpeedometer />,
+    name: "Cảnh báo tốc độ",
+  },
+  {
+    id: 10,
+    icon: <GiRaceCar />,
+    name: "Cửa sổ trời",
+  },
+  {
+    id: 11,
+    icon: <MdGpsFixed />,
+    name: "Định vị GPS",
+  },
+  {
+    id: 12,
+    icon: <MdAirlineSeatReclineExtra />,
+    name: "Ghế trẻ em",
+  },
+  {
+    id: 13,
+    icon: <CgUsb />,
+    name: "Khe cắm USB",
+  },
+  {
+    id: 14,
+    icon: <GiFlatTire />,
+    name: "Lốp dự phòng",
+  },
+  {
+    id: 15,
+    icon: <LuMonitorPlay />,
+    name: "Màn hình DVD",
+  },
+  {
+    id: 16,
+    icon: <FaTruckPickup />,
+    name: "Lắp thùng xe bán tải",
+  },
+  {
+    id: 17,
+    icon: <GiTripleGate />,
+    name: "ETC",
+  },
+  {
+    id: 18,
+    icon: <FaCarBurst />,
+    name: "Túi khí an toàn",
+  },
+];
 
 const onFinish = (values: unknown) => {
   console.log("Received values of form: ", values);
 };
 
 const CarRegister = () => {
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const handleToggle = (isOn: boolean) => {
+    alert(`The button is now ${isOn ? "ON" : "OFF"}`);
+  };
+
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +153,7 @@ const CarRegister = () => {
       // Logic to handle file upload goes here
       alert(`File uploaded: ${selectedFile.name}`);
     } else {
-      alert('No file selected');
+      alert("No file selected");
     }
   };
 
@@ -93,7 +211,7 @@ const CarRegister = () => {
                   Lưu ý: Thông tin cơ bản không thể thay đổi sau khi đăng ký
                 </p>
               </div>
-              <div className="grid-container">
+              <div className="info-grid-container">
                 <div className="grid-item">
                   <p>Hãng xe</p>
                   <Form.Item
@@ -241,7 +359,17 @@ const CarRegister = () => {
                   },
                 ]}
               >
-                <Input style={{ width: "800px", height: "80px" }} />
+                <div className="toggle-grid-container">
+                  {toggleButtons.map((button) => (
+                    <div key={button.id} className="grid-item">
+                      <ToggleButton
+                        icon={button.icon}
+                        name={button.name}
+                        onToggle={handleToggle}
+                      />
+                    </div>
+                  ))}
+                </div>
               </Form.Item>
 
               <h2>Hình ảnh</h2>
