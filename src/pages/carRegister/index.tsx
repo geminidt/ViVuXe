@@ -28,7 +28,7 @@ interface ToggleButton {
 
 const toggleButtons: ToggleButton[] = [
   {
-    id: "",
+    id: "1",
     icon: <FaMapMarkedAlt />,
     name: "Bản đồ",
   },
@@ -58,22 +58,22 @@ const toggleButtons: ToggleButton[] = [
     name: "Camera lùi",
   },
   {
-    id: "",
+    id: "2",
     icon: <MdTireRepair />,
     name: "Cảm biến lốp",
   },
   {
-    id: "",
+    id: "3",
     icon: <MdOutlineSensors />,
     name: "Cảm biến va chạm",
   },
   {
-    id: "",
+    id: "4",
     icon: <IoIosSpeedometer />,
     name: "Cảnh báo tốc độ",
   },
   {
-    id: "",
+    id: "5",
     icon: <GiRaceCar />,
     name: "Cửa sổ trời",
   },
@@ -103,7 +103,7 @@ const toggleButtons: ToggleButton[] = [
     name: "Màn hình DVD",
   },
   {
-    id: "",
+    id: "6",
     icon: <FaTruckPickup />,
     name: "Lắp thùng xe bán tải",
   },
@@ -119,26 +119,42 @@ const toggleButtons: ToggleButton[] = [
   },
 ];
 
-
-
 const CarRegister = () => {
-  const handleToggle = (isOn: boolean) => {
-    console.log(isOn);
+  const [featureList, setFeatureList] = useState<string[]>([]);
+  const handleToggle = (isOn: boolean, id: string) => {
+    console.log(isOn, id);
+    // kiểm tra xem isOn là true và id chưa có trong mảng featureList
+    if (isOn && !featureList.includes(id)) {
+      const newFeatureList = [...featureList]; // copy ra 1 mảng mới
+      newFeatureList.push(id); // thêm id vào cuối mảng
+      setFeatureList(newFeatureList); // set lại dữ liệu
+    }
+
+    if (!isOn) {
+      const newFeatureList = featureList.filter((item) => item !== id);
+      setFeatureList(newFeatureList); // set lại dữ liệu
+    }
   };
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [preview, setPreview] = useState<string[] | null>([]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files ? event.target.files[0] : null;
-    setSelectedFile(file);
- 
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    const files = Object.values(event.target.files)
+    setSelectedFiles(files);
+    console.log(files);
+
+    if (files.length) {
+      files.forEach((item) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const newPreview = [...preview];
+          newPreview.push(reader.result as string);
+          setPreview(newPreview);
+        };
+        reader.readAsDataURL(item);
+      });
     } else {
       setPreview(null);
     }
@@ -159,8 +175,9 @@ const CarRegister = () => {
     const body = {
       //@ts-ignore
       ...values,
-      imagePath: selectedFile?.name,
-    }
+      imagePath: selectedFiles.map((item) => item.name),
+      featureList: featureList,
+    };
     console.log("Received values of form: ", body);
   };
 
@@ -372,7 +389,7 @@ const CarRegister = () => {
                       <ToggleButton
                         icon={button.icon}
                         name={button.name}
-                        onToggle={handleToggle}
+                        onToggle={(isOn) => handleToggle(isOn, button.id)}
                       />
                     </div>
                   ))}
@@ -394,9 +411,13 @@ const CarRegister = () => {
                   type="file"
                   id="file-upload"
                   accept="image/*"
+                  multiple
                   onChange={handleFileChange}
                 />
-                {preview && <img src={preview} alt="Preview" width="200" />}
+                {preview?.map((item) => (
+                  <img key={item} src={item} alt="Preview" width="200" />
+                ))}
+                {/* {preview && <img src={preview} alt="Preview" width="200" />} */}
                 <input type="submit" value="Upload" />
               </Form.Item>
 
