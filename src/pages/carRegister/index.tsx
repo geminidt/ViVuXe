@@ -10,7 +10,7 @@ import {
   MdTireRepair,
   MdVideoCameraBack,
 } from "react-icons/md";
-import { Card, Form, Button, Input } from "antd";
+import { Card, Form, Button, Input, Image, Flex } from "antd";
 import ToggleButton from "../../components/toggleButtonProps";
 import { FaCamera, FaMapMarkedAlt, FaTruckPickup } from "react-icons/fa";
 import { TbView360Number } from "react-icons/tb";
@@ -120,7 +120,10 @@ const toggleButtons: ToggleButton[] = [
 ];
 
 const CarRegister = () => {
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [preview, setPreview] = useState<string[]>([]);
   const [featureList, setFeatureList] = useState<string[]>([]);
+
   const handleToggle = (isOn: boolean, id: string) => {
     console.log(isOn, id);
     // kiểm tra xem isOn là true và id chưa có trong mảng featureList
@@ -136,38 +139,20 @@ const CarRegister = () => {
     }
   };
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [preview, setPreview] = useState<string[] | null>([]);
-
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Object.values(event.target.files)
+    const files = Object.values(event.target.files as FileList);
     setSelectedFiles(files);
-    console.log(files);
 
     if (files.length) {
       files.forEach((item) => {
         const reader = new FileReader();
-        reader.onloadend = () => {
-          const newPreview = [...preview];
-          newPreview.push(reader.result as string);
-          setPreview(newPreview);
-        };
         reader.readAsDataURL(item);
+        reader.onloadend = () => {
+          setPreview((preState) => preState.concat(reader.result as string));
+        };
       });
     } else {
-      setPreview(null);
-    }
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    if (selectedFile) {
-      // Logic to handle file upload goes here
-      alert(`File uploaded: ${selectedFile.name}`);
-    } else {
-      alert("No file selected");
+      setPreview([]);
     }
   };
 
@@ -179,6 +164,7 @@ const CarRegister = () => {
       featureList: featureList,
     };
     console.log("Received values of form: ", body);
+    // call API here
   };
 
   return (
@@ -414,11 +400,17 @@ const CarRegister = () => {
                   multiple
                   onChange={handleFileChange}
                 />
-                {preview?.map((item) => (
-                  <img key={item} src={item} alt="Preview" width="200" />
-                ))}
-                {/* {preview && <img src={preview} alt="Preview" width="200" />} */}
-                <input type="submit" value="Upload" />
+                <Flex gap={20}>
+                  {preview?.map((item) => (
+                    <Image
+                      key={item}
+                      src={item}
+                      alt="Preview"
+                      width={200}
+                      height={200}
+                    />
+                  ))}
+                </Flex>
               </Form.Item>
 
               <Form.Item>
