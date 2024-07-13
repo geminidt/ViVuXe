@@ -5,6 +5,8 @@ import Login from "../pages/login";
 import Homepage from "../pages/homepage";
 import Userpage from "../pages/userpage";
 import CarRegister from "../pages/carRegister";
+import UserPageMenu from "../pages/userPageMenu";
+import UserPage2 from "../pages/userPage2";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +33,16 @@ const router = createBrowserRouter([
       {
         path: "userpage",
         element: <Userpage />,
+      },
+
+      {
+        path: "userpagemenu",
+        element: <UserPageMenu />,
+      },
+
+      {
+        path: "userpage2",
+        element: <UserPage2 />,
       },
 
       {

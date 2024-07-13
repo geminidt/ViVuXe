@@ -1,4 +1,4 @@
-import "./Userpage.scss";
+import "./UserPage2.scss";
 import {
   UserOutlined,
   CarOutlined,
@@ -37,9 +37,8 @@ const onFinish = (values: unknown) => {
   console.log("Received values of form: ", values);
 };
 
-const Userpage = () => {
+const UserPage2 = () => {
   return (
-    <div className="user-page">
       <div className="main-container">
         <div className="menu-container">
           <div>
@@ -56,7 +55,7 @@ const Userpage = () => {
           </div>
         </div>
         <div className="info-container">
-          <div className="info-card" style={{ position: "relative" }}>
+          <div className="info-card" style={{ position: "relative", marginLeft: "100px" }}>
             <Card style={{ width: 850, height: 350 }}>
               <div
                 className="info-left"
@@ -136,7 +135,7 @@ const Userpage = () => {
           </div>
 
           <div className="change-pass-card">
-            <Card style={{ width: 850, height: 350 }}>
+            <Card style={{ width: 850, height: 350, marginLeft: "100px", marginTop: "50px" }}>
               <div className="change-pass-title">
                 <h2 className="change-pass-title">Đổi mật khẩu</h2>
               </div>
@@ -205,8 +204,7 @@ const Userpage = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
-export default Userpage;
+export default UserPage2;

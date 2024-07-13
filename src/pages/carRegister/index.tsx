@@ -21,111 +21,109 @@ import { LuMonitorPlay } from "react-icons/lu";
 import { FaCarBurst } from "react-icons/fa6";
 
 interface ToggleButton {
-  id: number;
+  id: string;
   icon: React.ReactNode;
   name: string;
 }
 
 const toggleButtons: ToggleButton[] = [
   {
-    id: 1,
+    id: "",
     icon: <FaMapMarkedAlt />,
     name: "Bản đồ",
   },
   {
-    id: 2,
+    id: "bluetooth",
     icon: <MdBluetoothSearching />,
     name: "Bluetooth",
   },
   {
-    id: 3,
+    id: "camera360",
     icon: <TbView360Number />,
     name: "Camera 360",
   },
   {
-    id: 4,
+    id: "sideCamera",
     icon: <FaCamera />,
     name: "Camera cập lề",
   },
   {
-    id: 5,
+    id: "dashCamera",
     icon: <MdVideoCameraBack />,
     name: "Camera hành trình",
   },
   {
-    id: 6,
+    id: "rearCamera",
     icon: <MdCameraRear />,
     name: "Camera lùi",
   },
   {
-    id: 7,
+    id: "",
     icon: <MdTireRepair />,
     name: "Cảm biến lốp",
   },
   {
-    id: 8,
+    id: "",
     icon: <MdOutlineSensors />,
     name: "Cảm biến va chạm",
   },
   {
-    id: 9,
+    id: "",
     icon: <IoIosSpeedometer />,
     name: "Cảnh báo tốc độ",
   },
   {
-    id: 10,
+    id: "",
     icon: <GiRaceCar />,
     name: "Cửa sổ trời",
   },
   {
-    id: 11,
+    id: "gps",
     icon: <MdGpsFixed />,
     name: "Định vị GPS",
   },
   {
-    id: 12,
+    id: "childSeat",
     icon: <MdAirlineSeatReclineExtra />,
     name: "Ghế trẻ em",
   },
   {
-    id: 13,
+    id: "usb",
     icon: <CgUsb />,
     name: "Khe cắm USB",
   },
   {
-    id: 14,
+    id: "spareTire",
     icon: <GiFlatTire />,
     name: "Lốp dự phòng",
   },
   {
-    id: 15,
+    id: "dvdScreen",
     icon: <LuMonitorPlay />,
     name: "Màn hình DVD",
   },
   {
-    id: 16,
+    id: "",
     icon: <FaTruckPickup />,
     name: "Lắp thùng xe bán tải",
   },
   {
-    id: 17,
+    id: "etc",
     icon: <GiTripleGate />,
     name: "ETC",
   },
   {
-    id: 18,
+    id: "airbags",
     icon: <FaCarBurst />,
     name: "Túi khí an toàn",
   },
 ];
 
-const onFinish = (values: unknown) => {
-  console.log("Received values of form: ", values);
-};
+
 
 const CarRegister = () => {
   const handleToggle = (isOn: boolean) => {
-    alert(`The button is now ${isOn ? "ON" : "OFF"}`);
+    console.log(isOn);
   };
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -134,7 +132,7 @@ const CarRegister = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
     setSelectedFile(file);
-
+ 
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -155,6 +153,15 @@ const CarRegister = () => {
     } else {
       alert("No file selected");
     }
+  };
+
+  const onFinish = (values: unknown) => {
+    const body = {
+      //@ts-ignore
+      ...values,
+      imagePath: selectedFile?.name,
+    }
+    console.log("Received values of form: ", body);
   };
 
   return (
@@ -179,7 +186,7 @@ const CarRegister = () => {
         </p>
       </div>
       <div className="carregister-card">
-        <Card style={{ width: 850, height: 1500 }}>
+        <Card style={{ width: 850, height: 1800 }}>
           <div className="carregister-input">
             <Form
               className="carregister-form"
@@ -354,7 +361,7 @@ const CarRegister = () => {
                 name="feature"
                 rules={[
                   {
-                    required: true,
+                    // required: true,
                     message: "Xin hãy chọn tính năng!",
                   },
                 ]}
@@ -377,7 +384,7 @@ const CarRegister = () => {
                 name="image"
                 rules={[
                   {
-                    required: true,
+                    // required: true,
                     message: "Xin hãy chọn ảnh!",
                   },
                 ]}
