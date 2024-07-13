@@ -1,0 +1,25 @@
+.rental-detail{
+    .ant-row{
+        width: 100vw;
+        justify-content: center;
+        .ant-col{
+            margin-right: 30px;
+        }
+    }
+}
+
+.detail-1 {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    .img-container{
+        margin-right: 30px;
+    }
+    .info{
+        align-content: center;
+    }
+}
+
+h2{
+    font-size: 25px;
+    font-weight: 450;
+}

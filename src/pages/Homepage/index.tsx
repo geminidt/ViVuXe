@@ -3,14 +3,13 @@ import SearchBox from "../../common/components/ImageBox/seachBox";
 import { List, Space } from "antd";
 import "./Homepage.scss";
 import { Card } from "antd";
-import TPHCM from "../../assets/TPHCM.jpg";
-import Hanoi from "../../assets/Hanoi.jpg";
-import Danang from "../../assets/Danang.jpg";
-import Cantho from "../../assets/Cantho.jpg";
+import TPHCM from '../../assets/TPHCM.jpg'
+import Hoguom from '../../assets/Hoguom.jpg'
+import Bana from '../../assets/Bana.jpg'
+import Cantho from '../../assets/Cantho.jpg'
 import TanSonNhat from "../../assets/TanSonNhat.webp";
 import NoiBai from "../../assets/NoiBai.jpg";
 import SBDaNang from "../../assets/SBDaNang.jpg";
-import ImageWithAnnotation from "../../common/components/ImageBox/ImageWithAnnotation";
 
 import anh1 from "../../assets/anh1.png";
 import anh2 from "../../assets/anh2.png";
@@ -177,6 +176,43 @@ const Homepage: React.FC = () => {
     return null;
   };
 
+  interface ImageWithAnnotation {
+    id: number;
+    name: string;
+    image: string;
+    annotation: string;
+  }
+
+  const imageWithAnnotations: ImageWithAnnotation[] = [
+    {
+      id: 1,
+      name: "TPHCM",
+      image: TPHCM,
+      annotation: "TP Hồ Chí Minh 3200+ xe",
+    },
+
+    {
+      id: 2,
+      name: "Hanoi",
+      image: Hoguom,
+      annotation: "Hà Nội 2500+ xe",
+    },
+
+    {
+      id: 3,
+      name: "Danang",
+      image: Bana,
+      annotation: "Đà Nẵng 2000+ xe",
+    },
+
+    {
+      id: 4,
+      name: "Cantho",
+      image: Cantho,
+      annotation: "Cần Thơ 1000+ xe",
+    },
+  ];
+
   return (
     <div className="home-page">
       <div className="search-box">
@@ -224,65 +260,35 @@ const Homepage: React.FC = () => {
 
       <br />
 
-      <div className="pr-container">
-        <h2 className="pr-content">Địa điểm nổi bật</h2>
+      <div className="title-container">
+        <p className="pr-content">Địa điểm nổi bật</p>
       </div>
-      <div className="location-container">
-        <div className="location-card">
-          <div>
-            <ImageWithAnnotation
-              src={TPHCM}
-              alt="TPHCM"
-              annotation="TP Hồ Chí Minh 3200+ xe"
-              position={{ top: "240px" }}
-            />
-          </div>
-        </div>
-
-        <div className="location-card">
-          <div>
-            <ImageWithAnnotation
-              src={Hanoi}
-              alt="Hanoi"
-              annotation="Hà Nội 2500+ xe"
-              position={{ top: "240px", right: "30px" }}
-            />
-          </div>
-        </div>
-
-        <div className="location-card">
-          <div>
-            <ImageWithAnnotation
-              src={Danang}
-              alt="Danang"
-              annotation="Đà Nẵng 2000+ xe"
-              position={{ top: "240px", right: "30px" }}
-            />
-          </div>
-        </div>
-
-        <div className="location-card">
-          <div>
-            <ImageWithAnnotation
-              src={Cantho}
-              alt="Cantho"
-              annotation="Cần Thơ 1000+ xe"
-              position={{ top: "240px", right: "30px" }}
-            />
-          </div>
+      <div className="pr-container">
+        <div className="location-container">
+          {imageWithAnnotations.map((ImageWithAnnotation) => (
+            <div key={ImageWithAnnotation.id} className="image-card">
+              <div className="pr-image">
+                <img
+                  src={ImageWithAnnotation.image}
+                  alt={ImageWithAnnotation.name}
+                />
+                <p className="pr-title">{ImageWithAnnotation.annotation}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
       <div className="car-deliver">
         <Space direction="horizontal" size="middle" style={{ display: "flex" }}>
           <div>
-            <h2 style={{ color: "black" }}>Giao xe tại</h2>
-            <h2 style={{ color: "black" }}>sân bay</h2>
+            <h2 className="deliver-title">Giao xe tại</h2>
+            <h2 className="deliver-title">sân bay</h2>
           </div>
           <Card
             style={{
-              width: 200,
-              height: 150,
+              width: 312,
+              height: 220,
               borderRadius: "20px",
               display: "flex",
               justifyContent: "center",
@@ -293,15 +299,15 @@ const Homepage: React.FC = () => {
               src={TanSonNhat}
               alt="TanSonNhat"
               style={{ borderRadius: "50px" }}
-              width={80}
+              width={98}
             />
-            <p>Tân Sơn Nhất</p>
-            <p>2500 xe</p>
+            <p className="airport-title">Tân Sơn Nhất</p>
+            <p className="airport-title">2500 xe</p>
           </Card>
           <Card
             style={{
-              width: 200,
-              height: 150,
+              width: 312,
+              height: 220,
               borderRadius: "20px",
               display: "flex",
               justifyContent: "center",
@@ -312,15 +318,15 @@ const Homepage: React.FC = () => {
               src={NoiBai}
               alt="NoiBai"
               style={{ borderRadius: "50px" }}
-              width={80}
+              width={98}
             />
-            <p>Nội Bài</p>
-            <p>2500 xe</p>
+            <p className="airport-title">Nội Bài</p>
+            <p className="airport-title">2500 xe</p>
           </Card>
           <Card
             style={{
-              width: 200,
-              height: 150,
+              width: 312,
+              height: 220,
               borderRadius: "20px",
               display: "flex",
               justifyContent: "center",
@@ -331,10 +337,10 @@ const Homepage: React.FC = () => {
               src={SBDaNang}
               alt="SBDaNang"
               style={{ borderRadius: "50px" }}
-              width={70}
+              width={90}
             />
-            <p>Đà Nẵng</p>
-            <p>1500 xe</p>
+            <p className="airport-title">Đà Nẵng</p>
+            <p className="airport-title">1500 xe</p>
           </Card>
         </Space>
       </div>

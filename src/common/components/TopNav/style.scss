@@ -51,7 +51,7 @@
 
                 >a {
                     font-size: .875rem !important;
-                    font-weight: 700 !important;
+                    font-weight: 650 !important;
                     padding: 12px 16px;
                     -webkit-tap-highlight-color: rgba(0, 0, 0, .2) !important;
                     text-decoration: none;
@@ -116,4 +116,10 @@
 
         }
     }
+}
+
+.ant-btn{
+    background-color: #AAE0FF;
+    color: #000;
+    font-weight: 500;
 }

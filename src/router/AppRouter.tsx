@@ -4,6 +4,8 @@ import AuthRender from "../common/renderProps/AuthRender";
 import RootLayout from "../layout/RootLayout";
 import AboutCarRentalPerson from "../pages/AboutCarRentalPerson";
 import HomePage from "../pages/Homepage";
+import RentalPage from "../pages/RentalPage";
+import RentalDetailPage from "../pages/RentalDetailPage";
 
 interface RouteObject {
     path: string;
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
             {
                 path: "/aboutus",
                 element: <AboutCarRentalPerson />
+            },
+            {
+                path: "/rental",
+                element: <RentalPage />
+            },
+            {
+                path: "/rental/detail",
+                element: <RentalDetailPage />
             }
         ]
     }
