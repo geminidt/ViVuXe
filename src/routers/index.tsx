@@ -41,11 +41,6 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "userpage2",
-        element: <UserPage2 />,
-      },
-
-      {
         path: "carregister",
         element: <CarRegister />,
       },

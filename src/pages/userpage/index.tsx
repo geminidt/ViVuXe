@@ -39,170 +39,164 @@ const onFinish = (values: unknown) => {
 
 const Userpage = () => {
   return (
-    <div className="user-page">
-      <div className="main-container">
-        <div className="menu-container">
-          <div>
-            <p className="wellcome-title">Xin chào Goma!</p>
-            <hr />
-          </div>
-          <div className="menu-content">
-            <Menu
-              style={{ backgroundColor: "#e0f4ff" }}
-              defaultSelectedKeys={["1"]}
-              mode="inline"
-              items={items}
-            />
-          </div>
+    <div className="main-container">
+      <div className="menu-container">
+        <div>
+          <p className="wellcome-title">Xin chào Goma!</p>
+          <hr />
         </div>
-        <div className="info-container">
-          <div className="info-card" style={{ position: "relative" }}>
-            <Card style={{ width: 850, height: 350 }}>
-              <div
-                className="info-left"
-                style={{ marginLeft: "100px", marginTop: "20px" }}
+        <div className="menu-content">
+          <Menu
+            style={{ backgroundColor: "#e0f4ff" }}
+            defaultSelectedKeys={["1"]}
+            mode="inline"
+            items={items}
+          />
+        </div>
+      </div>
+      <div className="info-container">
+        <div className="info-card">
+          <Card style={{ width: 850, height: 350 }}>
+            <div
+              className="info-left"
+            >
+              <h2>
+                Thông tin tài khoản{" "}
+                <span>
+                  <button
+                    style={{
+                      backgroundColor: "white",
+                      color: "black",
+                      marginLeft: "320px",
+                      border: "1px solid black",
+                    }}
+                  >
+                    Chỉnh sửa
+                    <FormOutlined />
+                  </button>
+                </span>
+              </h2>
+              <br />
+              <img
+                src={Goma}
+                alt="Goma"
+                style={{
+                  width: "100px",
+                  borderRadius: "50px",
+                  marginLeft: "50px",
+                }}
+              />
+              <br />
+              <br />
+              <p style={{ fontSize: "25px", marginLeft: "60px" }}>Goma</p>
+              <p style={{ marginLeft: "25px" }}>Tham gia 12/06/2024</p>
+            </div>
+
+            <div
+              className="info-right"
+            >
+              <br />
+              <Card
+                className="user-info"
+                style={{
+                  backgroundColor: "#D9D9D9",
+                }}
               >
-                <h2>
-                  Thông tin tài khoản{" "}
-                  <span>
-                    <button
-                      style={{
-                        backgroundColor: "white",
-                        color: "black",
-                        marginLeft: "320px",
-                        border: "1px solid black",
-                      }}
+                <p>
+                  Họ và tên{" "}
+                  <span style={{ marginLeft: "130px" }}>Nguyễn Văn A </span>
+                </p>
+                <p>
+                  Ngày sinh{" "}
+                  <span style={{ marginLeft: "150px" }}>--/--/---- </span>
+                </p>
+                <p>
+                  Giới tính <span style={{ marginLeft: "180px" }}>Nam</span>
+                </p>
+                <p>
+                  Số điện thoại{" "}
+                  <span style={{ marginLeft: "120px" }}>0123456789</span>
+                </p>
+                <p>
+                  Email{" "}
+                  <span style={{ marginLeft: "150px" }}>abc@gmail.com</span>
+                </p>
+                <p>
+                  Số GPLX{" "}
+                  <span style={{ marginLeft: "140px" }}>12031ABC12312</span>
+                </p>
+              </Card>
+            </div>
+          </Card>
+        </div>
+
+        <div className="change-pass-card">
+          <Card style={{ width: 850, height: 350 }}>
+            <div className="change-pass-title">
+              <h2 className="change-pass-title">Đổi mật khẩu</h2>
+            </div>
+
+            <div className="change-pass-input">
+              <Form
+                className="change-pass-form"
+                initialValues={{
+                  remember: true,
+                }}
+                onFinish={onFinish}
+              >
+                <p>Mật khẩu hiện tại</p>
+                <Form.Item
+                  name="now-pass"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Xin hãy điền vào mật khẩu hiện tại!",
+                    },
+                  ]}
+                >
+                  <Input className="input-passChange" />
+                </Form.Item>
+
+                <p>Mật khẩu mới</p>
+                <Form.Item
+                  name="new-pass"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Xin hãy điền mật khẩu mới vào!",
+                    },
+                  ]}
+                >
+                  <Input className="input-passChange" />
+                </Form.Item>
+
+                <p>Xác nhận mật khẩu mới</p>
+                <Form.Item
+                  name="reinput-pass"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Xin hãy nhập lại mật khẩu mới!",
+                    },
+                  ]}
+                >
+                  <Input className="input-passChange" />
+                </Form.Item>
+
+                <Form.Item>
+                  <div className="subbmit-button-container">
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      className="submit-button"
                     >
-                      Chỉnh sửa
-                      <FormOutlined />
-                    </button>
-                  </span>
-                </h2>
-                <br />
-                <img
-                  src={Goma}
-                  alt="Goma"
-                  style={{
-                    width: "100px",
-                    borderRadius: "50px",
-                    marginLeft: "50px",
-                  }}
-                />
-                <br />
-                <br />
-                <p style={{ fontSize: "25px", marginLeft: "60px" }}>Goma</p>
-                <p style={{ marginLeft: "25px" }}>Tham gia 12/06/2024</p>
-              </div>
-
-              <div
-                className="info-right"
-                style={{ position: "absolute", left: "480px", bottom: "30px" }}
-              >
-                <br />
-                <Card
-                  className="user-info"
-                  style={{
-                    backgroundColor: "#D9D9D9",
-                    height: "220px",
-                    width: "350px",
-                  }}
-                >
-                  <p>
-                    Họ và tên{" "}
-                    <span style={{ marginLeft: "130px" }}>Nguyễn Văn A </span>
-                  </p>
-                  <p>
-                    Ngày sinh{" "}
-                    <span style={{ marginLeft: "150px" }}>--/--/---- </span>
-                  </p>
-                  <p>
-                    Giới tính <span style={{ marginLeft: "180px" }}>Nam</span>
-                  </p>
-                  <p>
-                    Số điện thoại{" "}
-                    <span style={{ marginLeft: "120px" }}>0123456789</span>
-                  </p>
-                  <p>
-                    Email{" "}
-                    <span style={{ marginLeft: "150px" }}>abc@gmail.com</span>
-                  </p>
-                  <p>
-                    Số GPLX{" "}
-                    <span style={{ marginLeft: "140px" }}>12031ABC12312</span>
-                  </p>
-                </Card>
-              </div>
-            </Card>
-          </div>
-
-          <div className="change-pass-card">
-            <Card style={{ width: 850, height: 350 }}>
-              <div className="change-pass-title">
-                <h2 className="change-pass-title">Đổi mật khẩu</h2>
-              </div>
-
-              <div className="change-pass-input">
-                <Form
-                  className="change-pass-form"
-                  initialValues={{
-                    remember: true,
-                  }}
-                  onFinish={onFinish}
-                >
-                  <p>Mật khẩu hiện tại</p>
-                  <Form.Item
-                    name="now-pass"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Xin hãy điền vào mật khẩu hiện tại!",
-                      },
-                    ]}
-                  >
-                    <Input style={{ width: "400px" }} />
-                  </Form.Item>
-
-                  <p>Mật khẩu mới</p>
-                  <Form.Item
-                    name="new-pass"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Xin hãy điền mật khẩu mới vào!",
-                      },
-                    ]}
-                  >
-                    <Input style={{ width: "400px" }} />
-                  </Form.Item>
-
-                  <p>Xác nhận mật khẩu mới</p>
-                  <Form.Item
-                    name="reinput-pass"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Xin hãy nhập lại mật khẩu mới!",
-                      },
-                    ]}
-                  >
-                    <Input style={{ width: "400px" }} />
-                  </Form.Item>
-
-                  <Form.Item>
-                    <div className="subbmit-button-container">
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="submit-button"
-                      >
-                        Xác nhận
-                      </Button>
-                    </div>
-                  </Form.Item>
-                </Form>
-              </div>
-            </Card>
-          </div>
+                      Xác nhận
+                    </Button>
+                  </div>
+                </Form.Item>
+              </Form>
+            </div>
+          </Card>
         </div>
       </div>
     </div>
