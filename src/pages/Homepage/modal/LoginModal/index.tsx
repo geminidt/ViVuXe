@@ -1,25 +1,35 @@
 import React from "react";
 import { Modal, Form, Input, Button } from "antd";
-import './style.scss';
+import "./style.scss";
+import { toast } from "react-toastify";
+import authService from "../../../../common/api/authService";
 
 interface LoginModalProps {
   visible: boolean;
   onClose: () => void;
-  onLogin: (values: { username: string; password: string }) => void;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({
-  visible,
-  onClose,
-  onLogin,
-}) => {
+const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
   const [form] = Form.useForm();
+
+  const login = async ({ username, password }: any) => {
+    try {
+      const loginResponse = await authService.login(username, password);
+      const data = loginResponse.data;
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("username", data.username);
+      toast.success("Dang nhap thanh cong");
+      onClose();
+    } catch (error) {
+      toast.error("Dang nhap that bai, Hay thu lai");
+    }
+  };
 
   const handleSubmit = () => {
     form
       .validateFields()
       .then((values) => {
-        onLogin(values);
+        login(values);
         form.resetFields();
       })
       .catch((error) => {
@@ -35,7 +45,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
   return (
     <Modal
       title="Đăng nhập"
-      visible={visible}
+      open={visible}
       onCancel={handleCancel}
       footer={
         <Button key="submit" type="primary" onClick={handleSubmit}>

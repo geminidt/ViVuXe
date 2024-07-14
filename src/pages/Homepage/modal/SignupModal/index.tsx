@@ -2,32 +2,22 @@ import "./style.scss";
 
 import React from "react";
 import { Modal, Form, Input, Button } from "antd";
-import authService from "../../../../common/api/authService";
 import { toast } from "react-toastify";
+import userService from "../../../../common/api/userService";
 
 interface SignupModalProps {
   visible: boolean;
   onClose: () => void;
-  onSignup: (values: {
-    username: string;
-    phone: string;
-    email: string;
-    password: string;
-    confirm: string;
-  }) => void;
 }
 
-const SignupModal: React.FC<SignupModalProps> = ({
-  visible,
-  onClose,
-  onSignup,
-}) => {
+const SignupModal: React.FC<SignupModalProps> = ({ visible, onClose }) => {
   const [form] = Form.useForm();
 
   const signUp = async (values: any) => {
     try {
-      await authService.signUp(values);
+      await userService.signUp(values);
       toast.success("Dang ky thanh cong");
+      onClose();
     } catch (error) {
       toast.error("Dang ky that bai");
     }
@@ -47,7 +37,7 @@ const SignupModal: React.FC<SignupModalProps> = ({
   return (
     <Modal
       title="Đăng ký"
-      visible={visible}
+      open={visible}
       onCancel={onClose}
       footer={
         <Button key="submit" type="primary" onClick={handleSubmit}>
@@ -85,11 +75,11 @@ const SignupModal: React.FC<SignupModalProps> = ({
           rules={[
             {
               type: "email",
-              message: "The input is not valid E-mail!",
+              message: "Không đúng định dạng email!",
             },
             {
               required: true,
-              message: "Please input your E-mail!",
+              message: "Hãy nhập email của bạn!",
             },
           ]}
         >
@@ -117,7 +107,7 @@ const SignupModal: React.FC<SignupModalProps> = ({
           rules={[
             {
               required: true,
-              message: "Please confirm your password!",
+              message: "Hãy nhập lại mật khẩu của bạn!",
             },
             ({ getFieldValue }) => ({
               validator(_, value) {
@@ -125,7 +115,9 @@ const SignupModal: React.FC<SignupModalProps> = ({
                   return Promise.resolve();
                 }
                 return Promise.reject(
-                  new Error("The new password that you entered do not match!")
+                  new Error(
+                    "Mật khẩu bạn nhập lại không khớp với mật khẩu trên!"
+                  )
                 );
               },
             }),

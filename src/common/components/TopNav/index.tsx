@@ -29,10 +29,11 @@ const TopNav: React.FC = () => {
     setSignupVisible(false);
   };
 
-  const userInfo = {
-    name: "admin",
-    /// ....
-  };
+  const userInfo = null;
+  // {
+  //   name: "admin",
+  //   /// ....
+  // };
 
   return (
     <div className="vivu_layout">

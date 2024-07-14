@@ -1,10 +1,16 @@
 import axiosClient from "./axiousClient"
 
-const END_POINT ='v1/users'
+const END_POINT ='/api/v1/auth'
 
 const authService = {
-    signIn(){
-
+    login(username: string, password: string){
+        return axiosClient.post(
+            `${END_POINT}/signin`,
+            {
+                username,
+                password
+            }
+        )
     },
     signUp(body: any) {
         return axiosClient.post(END_POINT, body)

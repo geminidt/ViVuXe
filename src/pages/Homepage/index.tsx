@@ -3,10 +3,10 @@ import SearchBox from "../../common/components/ImageBox/seachBox";
 import { List, Space } from "antd";
 import "./Homepage.scss";
 import { Card } from "antd";
-import TPHCM from '../../assets/TPHCM.jpg'
-import Hoguom from '../../assets/Hoguom.jpg'
-import Bana from '../../assets/Bana.jpg'
-import Cantho from '../../assets/Cantho.jpg'
+import TPHCM from "../../assets/TPHCM.jpg";
+import Hoguom from "../../assets/Hoguom.jpg";
+import Bana from "../../assets/Bana.jpg";
+import Cantho from "../../assets/Cantho.jpg";
 import TanSonNhat from "../../assets/TanSonNhat.webp";
 import NoiBai from "../../assets/NoiBai.jpg";
 import SBDaNang from "../../assets/SBDaNang.jpg";
@@ -217,15 +217,6 @@ const Homepage: React.FC = () => {
     <div className="home-page">
       <div className="search-box">
         <SearchBox onSearch={handleSearch} />
-      </div>
-
-      <div className="list">
-        <List
-          style={{ marginTop: "20px" }}
-          bordered
-          dataSource={results}
-          renderItem={(item) => <List.Item>{item.name}</List.Item>}
-        />
       </div>
 
       <div className="car-list">
