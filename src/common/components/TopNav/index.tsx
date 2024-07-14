@@ -9,26 +9,7 @@ const TopNav: React.FC = () => {
   const [loginVisible, setLoginVisible] = useState(false);
   const [signupVisible, setSignupVisible] = useState(false);
 
-  const handleLogin = (values: { username: string; password: string }) => {
-    // Handle login logic here (e.g., API call)
-    console.log("Login with:", values);
-    // Close modal after login attempt
-    setLoginVisible(false);
-  };
-
-  const handleSignup = (values: {
-    username: string;
-    phone: string;
-    email: string;
-    password: string;
-    confirm: string;
-  }) => {
-    // Handle login logic here (e.g., API call)
-    console.log("Sigin with:", values);
-    // Close modal after login attempt
-    setSignupVisible(false);
-  };
-
+  const userFromLocalStorage = localStorage.getItem("user");
   const userInfo = null;
   // {
   //   name: "admin",
@@ -39,7 +20,7 @@ const TopNav: React.FC = () => {
     <div className="vivu_layout">
       <div className="header">
         <div className="m_container">
-          <a href="/#" className="logo_container">
+          <a href="/" className="logo_container">
             <div className="full_logo">
               <img loading="lazy" alt="Vivuxe" src={VivuxeLogo} />
             </div>
@@ -47,9 +28,9 @@ const TopNav: React.FC = () => {
           <div className="menu_container">
             <a href="/#">Về VivuXe </a>
             <div className="vertical_line"></div>
-            {userInfo ? (
+            {userFromLocalStorage ? (
               <div>
-                <span>Xin chào {userInfo.name}</span>
+                <span>Xin chào {userFromLocalStorage}</span>
                 <button>log out</button>
               </div>
             ) : (
@@ -61,7 +42,6 @@ const TopNav: React.FC = () => {
                   <SignupModal
                     visible={signupVisible}
                     onClose={() => setSignupVisible(false)}
-                    onSignup={handleSignup}
                   />
                 </div>
                 <div>
@@ -71,7 +51,6 @@ const TopNav: React.FC = () => {
                   <LoginModal
                     visible={loginVisible}
                     onClose={() => setLoginVisible(false)}
-                    onLogin={handleLogin}
                   />
                 </div>
               </>
