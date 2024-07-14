@@ -6,7 +6,6 @@ import Homepage from "../pages/homepage";
 import Userpage from "../pages/userpage";
 import CarRegister from "../pages/carRegister";
 import UserPageMenu from "../pages/userPageMenu";
-import UserPage2 from "../pages/userPage2";
 
 const router = createBrowserRouter([
     {
