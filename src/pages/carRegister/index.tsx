@@ -158,6 +158,7 @@ const CarRegister = () => {
 
   const onFinish = (values: unknown) => {
     const body = {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       ...values,
       imagePath: selectedFiles.map((item) => item.name),
@@ -204,7 +205,7 @@ const CarRegister = () => {
                 <p>Lưu ý: Biển số không thể thay đổi sau khi đăng ký</p>
               </div>
               <Form.Item
-                name="car-number"
+                name="licensePlate"
                 rules={[
                   {
                     required: true,
@@ -225,7 +226,7 @@ const CarRegister = () => {
                 <div className="grid-item">
                   <p>Hãng xe</p>
                   <Form.Item
-                    name="car-maker"
+                    name="make"
                     rules={[
                       {
                         required: true,
@@ -240,7 +241,7 @@ const CarRegister = () => {
                 <div className="grid-item">
                   <p>Mẫu xe</p>
                   <Form.Item
-                    name="car-name"
+                    name="name"
                     rules={[
                       {
                         required: true,
@@ -255,7 +256,7 @@ const CarRegister = () => {
                 <div className="grid-item">
                   <p>Số ghế</p>
                   <Form.Item
-                    name="number-of-seat"
+                    name="seat"
                     rules={[
                       {
                         required: true,
@@ -270,7 +271,7 @@ const CarRegister = () => {
                 <div className="grid-item">
                   <p>Năm sản xuất</p>
                   <Form.Item
-                    name="make-year"
+                    name="year"
                     rules={[
                       {
                         required: true,
@@ -300,7 +301,7 @@ const CarRegister = () => {
                 <div className="grid-item">
                   <p>Loại nhiên liệu</p>
                   <Form.Item
-                    name="type-of-fuel"
+                    name="fuel"
                     rules={[
                       {
                         required: true,
@@ -322,7 +323,7 @@ const CarRegister = () => {
                 </p>
               </div>
               <Form.Item
-                name="unit-price"
+                name="cost"
                 rules={[
                   {
                     required: true,
@@ -335,7 +336,7 @@ const CarRegister = () => {
 
               <h2>Địa chỉ xe</h2>
               <Form.Item
-                name="car-address"
+                name="address"
                 rules={[
                   {
                     required: true,
