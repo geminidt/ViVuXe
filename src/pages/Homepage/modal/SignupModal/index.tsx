@@ -3,7 +3,7 @@ import "./style.scss";
 import React from "react";
 import { Modal, Form, Input, Button } from "antd";
 import { toast } from "react-toastify";
-import userService from "../../../../common/api/userService";
+import authService from "../../../../common/api/authService";
 
 interface SignupModalProps {
   visible: boolean;
@@ -15,7 +15,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ visible, onClose }) => {
 
   const signUp = async (values: any) => {
     try {
-      await userService.signUp(values);
+      await authService.signUp(values);
       toast.success("Dang ky thanh cong");
       onClose();
     } catch (error) {
@@ -27,6 +27,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ visible, onClose }) => {
       .validateFields()
       .then((values) => {
         signUp(values);
+        console.log(values);
         // form.resetFields();
       })
       .catch((error) => {

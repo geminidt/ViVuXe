@@ -4,12 +4,24 @@ import { Button, Form } from "antd";
 import { useState } from "react";
 import LoginModal from "../../../pages/Homepage/modal/LoginModal";
 import SignupModal from "../../../pages/Homepage/modal/SignupModal";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const TopNav: React.FC = () => {
   const [loginVisible, setLoginVisible] = useState(false);
   const [signupVisible, setSignupVisible] = useState(false);
 
-  const userFromLocalStorage = localStorage.getItem("user");
+  const userFromLocalStorage = localStorage.getItem("username");
+
+  const nav = useNavigate();
+
+  const handleLogoutClicked = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    nav("/");
+    toast.success("Dang xuat thanh cong");
+  };
+
   const userInfo = null;
   // {
   //   name: "admin",
@@ -30,8 +42,12 @@ const TopNav: React.FC = () => {
             <div className="vertical_line"></div>
             {userFromLocalStorage ? (
               <div>
-                <span>Xin chào {userFromLocalStorage}</span>
-                <button>log out</button>
+                <span className="info-username">
+                  Xin chào {userFromLocalStorage}{" "}
+                </span>
+                <Button type="primary" onClick={handleLogoutClicked}>
+                  Đăng xuất
+                </Button>
               </div>
             ) : (
               <>

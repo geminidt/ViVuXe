@@ -13,7 +13,7 @@ const authService = {
         )
     },
     signUp(body: any) {
-        return axiosClient.post(END_POINT, body)
+        return axiosClient.post(`${END_POINT}/signup`, body)
     }
 }
 
