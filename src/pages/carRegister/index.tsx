@@ -15,7 +15,7 @@ import ToggleButton from "../../components/toggleButtonProps";
 import { FaCamera, FaMapMarkedAlt, FaTruckPickup } from "react-icons/fa";
 import { TbView360Number } from "react-icons/tb";
 import { IoIosSpeedometer } from "react-icons/io";
-import { GiFlatTire, GiRaceCar, GiTripleGate } from "react-icons/gi";
+import { GiFlatTire, GiTripleGate } from "react-icons/gi";
 import { CgUsb } from "react-icons/cg";
 import { LuMonitorPlay } from "react-icons/lu";
 import { FaCarBurst } from "react-icons/fa6";
@@ -28,7 +28,7 @@ interface ToggleButton {
 
 const toggleButtons: ToggleButton[] = [
   {
-    id: "1",
+    id: "map",
     icon: <FaMapMarkedAlt />,
     name: "Bản đồ",
   },
@@ -58,25 +58,25 @@ const toggleButtons: ToggleButton[] = [
     name: "Camera lùi",
   },
   {
-    id: "2",
+    id: "tireSensor",
     icon: <MdTireRepair />,
     name: "Cảm biến lốp",
   },
   {
-    id: "3",
+    id: "collisionSensor",
     icon: <MdOutlineSensors />,
     name: "Cảm biến va chạm",
   },
   {
-    id: "4",
+    id: "speedWarning",
     icon: <IoIosSpeedometer />,
     name: "Cảnh báo tốc độ",
   },
-  {
-    id: "5",
-    icon: <GiRaceCar />,
-    name: "Cửa sổ trời",
-  },
+  // {
+  //   id: "5",
+  //   icon: <GiRaceCar />,
+  //   name: "Cửa sổ trời",
+  // },
   {
     id: "gps",
     icon: <MdGpsFixed />,
@@ -103,7 +103,7 @@ const toggleButtons: ToggleButton[] = [
     name: "Màn hình DVD",
   },
   {
-    id: "6",
+    id: "truckCover",
     icon: <FaTruckPickup />,
     name: "Lắp thùng xe bán tải",
   },
@@ -241,7 +241,7 @@ const CarRegister = () => {
                 <div className="grid-item">
                   <p>Mẫu xe</p>
                   <Form.Item
-                    name="name"
+                    name="model"
                     rules={[
                       {
                         required: true,

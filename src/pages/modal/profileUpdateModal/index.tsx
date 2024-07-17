@@ -2,7 +2,7 @@ import "./ProfileUpdateModal.scss";
 
 import React, { useState } from "react";
 import { Modal, Form, Input, Button } from "antd";
-// import BirthdatePicker from "../../../components/birthdatePicker";
+import BirthdatePicker from "../../../components/birthdatePicker";
 import { toast } from "react-toastify";
 import userService from "../../../common/api/userService";
 
@@ -22,6 +22,7 @@ const ProfileUpdateModal: React.FC<ProfileUpdateModalProps> = ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const profileUpdate = async (values: any) => {
       try {
+        console.log('Values:', values);
         await userService.signUp(values);
         toast.success("Dang ky thanh cong");
         onClose();
@@ -35,13 +36,16 @@ const ProfileUpdateModal: React.FC<ProfileUpdateModalProps> = ({
       .then((values) => {
         profileUpdate(values);
         // form.resetFields();
+        
       })
       .catch((error) => {
         console.error("Validation failed:", error);
       });
   };
 
-  const [gender, setGender] = useState<Gender>("Nam");
+  
+
+  const [gender, setGender] = useState<Gender>('Khác');
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setGender(event.target.value as Gender);
   };
@@ -73,13 +77,10 @@ const ProfileUpdateModal: React.FC<ProfileUpdateModalProps> = ({
 
         <p>Ngày sinh: </p>
         <Form.Item
-          name="birth-of-date"
+          name="dob"
           rules={[{ required: true, message: "Hãy nhập ngày sinh của bạn!" }]}
         > 
-            {/* <BirthdatePicker /> */}
-            <div>
-            <Input type="date" />
-            </div>
+            <BirthdatePicker />
             
         </Form.Item>
 
