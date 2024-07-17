@@ -1,4 +1,5 @@
 import "./Userpage.scss";
+import { useState } from "react";
 import {
   UserOutlined,
   CarOutlined,
@@ -12,6 +13,7 @@ import {
 import type { MenuProps } from "antd";
 import { Menu, Card, Form, Button, Input } from "antd";
 import Goma from "../../assets/Goma.jpg";
+import ProfileUpdateModal from "./modal/profileUpdateModal";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -38,6 +40,8 @@ const onFinish = (values: unknown) => {
 };
 
 const Userpage = () => {
+  const [profileUpdateVisible, setProfileUpdateVisible] = useState(false);
+
   return (
     <div className="main-container">
       <div className="menu-container">
@@ -61,17 +65,23 @@ const Userpage = () => {
               <h2>
                 Thông tin tài khoản{" "}
                 <span>
-                  <button
+                  <Button
+                    type="primary"
+                    onClick={() => setProfileUpdateVisible(true)}
                     style={{
                       backgroundColor: "white",
                       color: "black",
-                      marginLeft: "270px",
+                      marginLeft: "320px",
                       border: "1px solid black",
                     }}
                   >
                     Chỉnh sửa
                     <FormOutlined />
-                  </button>
+                  </Button>
+                  <ProfileUpdateModal
+                    visible={profileUpdateVisible}
+                    onClose={() => setProfileUpdateVisible(false)}
+                  />
                 </span>
               </h2>
               <br />

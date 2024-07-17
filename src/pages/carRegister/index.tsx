@@ -15,7 +15,7 @@ import ToggleButton from "../../common/components/Button/toggleButtonProps";
 import { FaCamera, FaMapMarkedAlt, FaTruckPickup } from "react-icons/fa";
 import { TbView360Number } from "react-icons/tb";
 import { IoIosSpeedometer } from "react-icons/io";
-import { GiFlatTire, GiRaceCar, GiTripleGate } from "react-icons/gi";
+import { GiFlatTire, GiTripleGate } from "react-icons/gi";
 import { CgUsb } from "react-icons/cg";
 import { LuMonitorPlay } from "react-icons/lu";
 import { FaCarBurst } from "react-icons/fa6";
@@ -28,7 +28,7 @@ interface ToggleButton {
 
 const toggleButtons: ToggleButton[] = [
   {
-    id: "1",
+    id: "map",
     icon: <FaMapMarkedAlt />,
     name: "Bản đồ",
   },
@@ -58,25 +58,25 @@ const toggleButtons: ToggleButton[] = [
     name: "Camera lùi",
   },
   {
-    id: "2",
+    id: "tireSensor",
     icon: <MdTireRepair />,
     name: "Cảm biến lốp",
   },
   {
-    id: "3",
+    id: "collisionSensor",
     icon: <MdOutlineSensors />,
     name: "Cảm biến va chạm",
   },
   {
-    id: "4",
+    id: "speedWarning",
     icon: <IoIosSpeedometer />,
     name: "Cảnh báo tốc độ",
   },
-  {
-    id: "5",
-    icon: <GiRaceCar />,
-    name: "Cửa sổ trời",
-  },
+  // {
+  //   id: "5",
+  //   icon: <GiRaceCar />,
+  //   name: "Cửa sổ trời",
+  // },
   {
     id: "gps",
     icon: <MdGpsFixed />,
@@ -103,7 +103,7 @@ const toggleButtons: ToggleButton[] = [
     name: "Màn hình DVD",
   },
   {
-    id: "6",
+    id: "truckCover",
     icon: <FaTruckPickup />,
     name: "Lắp thùng xe bán tải",
   },
@@ -158,6 +158,7 @@ const CarRegister = () => {
 
   const onFinish = (values: unknown) => {
     const body = {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       ...values,
       imagePath: selectedFiles.map((item) => item.name),
@@ -204,7 +205,7 @@ const CarRegister = () => {
                 <p>Lưu ý: Biển số không thể thay đổi sau khi đăng ký</p>
               </div>
               <Form.Item
-                name="car-number"
+                name="licensePlate"
                 rules={[
                   {
                     required: true,
@@ -225,7 +226,7 @@ const CarRegister = () => {
                 <div className="grid-item">
                   <p>Hãng xe</p>
                   <Form.Item
-                    name="car-maker"
+                    name="make"
                     rules={[
                       {
                         required: true,
@@ -240,7 +241,7 @@ const CarRegister = () => {
                 <div className="grid-item">
                   <p>Mẫu xe</p>
                   <Form.Item
-                    name="car-name"
+                    name="model"
                     rules={[
                       {
                         required: true,
@@ -255,7 +256,7 @@ const CarRegister = () => {
                 <div className="grid-item">
                   <p>Số ghế</p>
                   <Form.Item
-                    name="number-of-seat"
+                    name="seat"
                     rules={[
                       {
                         required: true,
@@ -270,7 +271,7 @@ const CarRegister = () => {
                 <div className="grid-item">
                   <p>Năm sản xuất</p>
                   <Form.Item
-                    name="make-year"
+                    name="year"
                     rules={[
                       {
                         required: true,
@@ -300,7 +301,7 @@ const CarRegister = () => {
                 <div className="grid-item">
                   <p>Loại nhiên liệu</p>
                   <Form.Item
-                    name="type-of-fuel"
+                    name="fuel"
                     rules={[
                       {
                         required: true,
@@ -322,7 +323,7 @@ const CarRegister = () => {
                 </p>
               </div>
               <Form.Item
-                name="unit-price"
+                name="cost"
                 rules={[
                   {
                     required: true,
@@ -335,7 +336,7 @@ const CarRegister = () => {
 
               <h2>Địa chỉ xe</h2>
               <Form.Item
-                name="car-address"
+                name="address"
                 rules={[
                   {
                     required: true,
