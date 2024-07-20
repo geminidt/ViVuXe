@@ -1,5 +1,5 @@
 import "./Userpage.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   UserOutlined,
   CarOutlined,
@@ -14,6 +14,7 @@ import type { MenuProps } from "antd";
 import { Menu, Card, Form, Button, Input } from "antd";
 import Goma from "../../assets/Goma.jpg";
 import ProfileUpdateModal from "../modal/profileUpdateModal";
+import userService from "../../common/api/userService";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -35,6 +36,17 @@ const items: MenuItem[] = [
   { key: "8", icon: <LogoutOutlined />, label: "Đăng xuất" },
 ];
 
+interface User {
+  // userResponse: userResponse;
+  userId: number;
+  userName: string;
+  dob: string;
+  gender: string;
+  phone: number;
+  email: string;
+  driverLicense: string;
+  createDate: string;
+}
 
 const onFinish = (values: unknown) => {
   console.log("Received values of form: ", values);
@@ -42,6 +54,25 @@ const onFinish = (values: unknown) => {
 
 const Userpage = () => {
   const [profileUpdateVisible, setProfileUpdateVisible] = useState(false);
+
+  const size = 8;
+  const [page, setPage] = useState(1);
+  const [allUsers, setAllUsers] = useState<User[]>([]);
+
+  const fetchUser = async () => {
+    try {
+      const response = await userService.getUser(page, size);
+      const { content } = response.data;
+      console.log(content);
+      setAllUsers(content);
+    } catch (err) {
+      console.error("Error fetching rentals:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, [page]);
 
   return (
     <div className="main-container">
@@ -62,13 +93,13 @@ const Userpage = () => {
       <div className="info-container">
         <div className="info-card">
           <Card style={{ width: 850, height: 350 }}>
-            <div
-              className="info-left"
-            >
+            <div className="info-left">
               <h2>
                 Thông tin tài khoản{" "}
                 <span>
-                  <Button type="primary" onClick={() => setProfileUpdateVisible(true)}
+                  <Button
+                    type="primary"
+                    onClick={() => setProfileUpdateVisible(true)}
                     style={{
                       backgroundColor: "white",
                       color: "black",
@@ -101,40 +132,46 @@ const Userpage = () => {
               <p style={{ marginLeft: "25px" }}>Tham gia 12/06/2024</p>
             </div>
 
-            <div
-              className="info-right"
-            >
+            <div className="info-right">
               <br />
-              <Card
-                className="user-info"
-                style={{
-                  backgroundColor: "#D9D9D9",
-                }}
-              >
-                <p>
-                  Họ và tên{" "}
-                  <span style={{ marginLeft: "130px" }}>Nguyễn Văn A </span>
-                </p>
-                <p>
-                  Ngày sinh{" "}
-                  <span style={{ marginLeft: "150px" }}>--/--/---- </span>
-                </p>
-                <p>
-                  Giới tính <span style={{ marginLeft: "180px" }}>Nam</span>
-                </p>
-                <p>
-                  Số điện thoại{" "}
-                  <span style={{ marginLeft: "120px" }}>0123456789</span>
-                </p>
-                <p>
-                  Email{" "}
-                  <span style={{ marginLeft: "150px" }}>abc@gmail.com</span>
-                </p>
-                <p>
-                  Số GPLX{" "}
-                  <span style={{ marginLeft: "140px" }}>12031ABC12312</span>
-                </p>
-              </Card>
+              {allUsers.map((user) => (
+                <Card
+                  key={user.userId}
+                  className="user-info"
+                  style={{
+                    backgroundColor: "#D9D9D9",
+                  }}
+                >
+                  <p>
+                    Họ và tên{" "}
+                    <span style={{ marginLeft: "130px" }}>
+                      {/* {user.userName} */}Nguyễn Văn A
+                    </span>
+                  </p>
+                  <p>
+                    Ngày sinh{" "}
+                    <span style={{ marginLeft: "150px" }}>{user.dob} </span>
+                  </p>
+                  <p>
+                    Giới tính{" "}
+                    <span style={{ marginLeft: "180px" }}>{user.gender}</span>
+                  </p>
+                  <p>
+                    Số điện thoại{" "}
+                    <span style={{ marginLeft: "120px" }}>{user.phone}</span>
+                  </p>
+                  <p>
+                    Email{" "}
+                    <span style={{ marginLeft: "150px" }}>{user.email}</span>
+                  </p>
+                  <p>
+                    Số GPLX{" "}
+                    <span style={{ marginLeft: "140px" }}>
+                      {user.driverLicense}
+                    </span>
+                  </p>
+                </Card>
+              ))}
             </div>
           </Card>
         </div>
