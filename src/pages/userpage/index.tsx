@@ -41,6 +41,7 @@ const items: MenuItem[] = [
 export interface User {
   userId: number;
   username: string;
+  fullName: string;
   dob: string;
   gender: string;
   phone: string;
@@ -153,7 +154,7 @@ const Userpage = () => {
               >
                 <Row>
                   <Col span={8}>Họ và tên:</Col>
-                  <Col span={16}>{user.username}</Col>
+                  <Col span={16}>{user.fullName}</Col>
                   <Col span={8}>Ngày sinh:</Col>
                   <Col span={16}>{formatDate(user.dob)}</Col>
                   <Col span={8}>Giới tính:</Col>

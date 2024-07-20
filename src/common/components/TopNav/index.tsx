@@ -1,11 +1,11 @@
 import "./style.scss";
 import VivuxeLogo from "../../../assets/VivuxeLogo.png";
-import { Button, Dropdown, Form } from "antd";
+import { Button, Dropdown } from "antd";
 import { useState } from "react";
-import LoginModal from "../../../pages/Homepage/modal/LoginModal";
-import SignupModal from "../../../pages/Homepage/modal/SignupModal";
 import { useNavigate } from "react-router-dom";
 import { logOut } from "../../helpers";
+import LoginModal from "../../../pages/homepage/modal/LoginModal";
+import SignupModal from "../../../pages/homepage/modal/SignupModal";
 
 const TopNav: React.FC = () => {
   const nav = useNavigate();

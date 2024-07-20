@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import userService from "../../../../common/api/userService";
 import { User } from "../..";
 import { useEffect } from "react";
-import { formatDate } from "../../../../common/helpers";
+// import { formatDate } from "../../../../common/helpers";
 import dayjs from "dayjs";
 
 interface ProfileUpdateModalProps {
@@ -69,18 +69,18 @@ const ProfileUpdateModal: React.FC<ProfileUpdateModalProps> = ({
       }
     >
       <Form form={form} onFinish={handleSubmit} layout="vertical">
-        {/* <p>Tên tài khoản </p>
         <Form.Item
-          name="username"
+          name="fullName"
+          label="Họ và tên"
           rules={[
             {
               required: false,
-              message: "Hãy nhập tên tài khoản!",
+              message: "Hãy nhập họ và tên!",
             },
           ]}
         >
           <Input />
-        </Form.Item> */}
+        </Form.Item>
 
         <Form.Item
           name="dob"
@@ -137,6 +137,22 @@ const ProfileUpdateModal: React.FC<ProfileUpdateModalProps> = ({
           name="driverLicense"
           label="Số GPLX"
           rules={[{ required: true, message: "Hãy nhập số GPLX của bạn!" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          name="bankName"
+          label="Ngân hàng"
+          rules={[{ required: true, message: "Hãy nhập tên ngân hàng!" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          name="accountNumber"
+          label="Số tài khoản"
+          rules={[{ required: true, message: "Hãy nhập số tài khoản!" }]}
         >
           <Input />
         </Form.Item>

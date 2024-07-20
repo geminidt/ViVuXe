@@ -12,6 +12,7 @@ interface LoginModalProps {
 const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
   const [form] = Form.useForm();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const login = async ({ username, password }: any) => {
     try {
       const loginResponse = await authService.login(username, password);
