@@ -171,64 +171,66 @@ const Userpage = () => {
         </div>
 
         <div className="change-pass-card">
-          <Card style={{ width: 850, height: 350 }}>
-            <div className="change-pass-title">
-              <h2 className="change-pass-title">Đổi mật khẩu</h2>
-            </div>
+          <Card style={{ width: 850, height: 380 }}>
+            <div className="change-pass-card-info">
+              <div className="change-pass-title">
+                <h2 className="change-pass-title">Đổi mật khẩu</h2>
+              </div>
 
-            <div className="change-pass-input">
-              <Form className="change-pass-form" onFinish={onFinish}>
-                <p>Mật khẩu hiện tại</p>
-                <Form.Item
-                  name="now-pass"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Xin hãy điền vào mật khẩu hiện tại!",
-                    },
-                  ]}
-                >
-                  <Input className="input-passChange" />
-                </Form.Item>
+              <div className="change-pass-input">
+                <Form className="change-pass-form" onFinish={onFinish}>
+                  <p>Mật khẩu hiện tại</p>
+                  <Form.Item
+                    name="now-pass"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Xin hãy điền vào mật khẩu hiện tại!",
+                      },
+                    ]}
+                  >
+                    <Input className="input-passChange" />
+                  </Form.Item>
 
-                <p>Mật khẩu mới</p>
-                <Form.Item
-                  name="new-pass"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Xin hãy điền mật khẩu mới vào!",
-                    },
-                  ]}
-                >
-                  <Input className="input-passChange" />
-                </Form.Item>
+                  <p>Mật khẩu mới</p>
+                  <Form.Item
+                    name="new-pass"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Xin hãy điền mật khẩu mới vào!",
+                      },
+                    ]}
+                  >
+                    <Input className="input-passChange" />
+                  </Form.Item>
 
-                <p>Xác nhận mật khẩu mới</p>
-                <Form.Item
-                  name="reinput-pass"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Xin hãy nhập lại mật khẩu mới!",
-                    },
-                  ]}
-                >
-                  <Input className="input-passChange" />
-                </Form.Item>
+                  <p>Xác nhận mật khẩu mới</p>
+                  <Form.Item
+                    name="reinput-pass"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Xin hãy nhập lại mật khẩu mới!",
+                      },
+                    ]}
+                  >
+                    <Input className="input-passChange" />
+                  </Form.Item>
 
-                <Form.Item>
-                  <div className="subbmit-button-container">
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      className="submit-button"
-                    >
-                      Xác nhận
-                    </Button>
-                  </div>
-                </Form.Item>
-              </Form>
+                  <Form.Item>
+                    <div className="subbmit-button-container">
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="submit-button"
+                      >
+                        Xác nhận
+                      </Button>
+                    </div>
+                  </Form.Item>
+                </Form>
+              </div>
             </div>
           </Card>
         </div>

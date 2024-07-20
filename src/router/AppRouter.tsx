@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         element: <RentalDetailPage />,
       },
       {
-        path: "car/register",
+        path: "/car/register",
         element: <CarRegister />,
       },
       {
