@@ -25,7 +25,10 @@ a:hover {
 body {
   margin: 0;
   display: flex;
+<<<<<<< HEAD
   place-items: center;
+=======
+>>>>>>> hieu
   min-width: 320px;
   min-height: 100vh;
 }
