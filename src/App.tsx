@@ -1,15 +1,15 @@
 import React from 'react';
-import CarGallery from './components/CarGallery';
-import Header from './components/Header';
+// import CarGallery from './components/Car Detail/CarGallery';
+// import Header from './components/Car Detail/Header';
 import './global.scss';
-import Content from './components/Content';
+import CarDetail from './components/Car Detail/CarDetail';
 
 const App: React.FC = () => {
   return (
     <div className="app">
-      <Header />
-      <CarGallery />
-      <Content />
+      {/* <Header /> */}
+      {/* <CarGallery /> */}
+      <CarDetail />
     </div>
   );
 };
