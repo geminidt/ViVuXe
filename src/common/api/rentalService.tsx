@@ -1,11 +1,9 @@
 import axiosClient from "./axiousClient";
-import CheckToken from "./checkToken";
 import { getHeaderWithToken } from "./getHeaderWithToken";
 
 const BASE_URL = "/api/v1/rentals";
 
 const getRentalPaging = (page: number, size: number) => {
-  CheckToken({}, null);
   return axiosClient.get(`${BASE_URL}/starred?page=${page}&size=${size}`, {
     headers: getHeaderWithToken(),
   });

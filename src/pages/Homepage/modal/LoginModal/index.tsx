@@ -18,6 +18,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
       const data = loginResponse.data;
       localStorage.setItem("token", data.token);
       localStorage.setItem("username", data.username);
+      localStorage.setItem("userId", data.userId);
       toast.success("Dang nhap thanh cong");
       onClose();
     } catch (error) {

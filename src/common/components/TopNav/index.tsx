@@ -1,32 +1,37 @@
 import "./style.scss";
 import VivuxeLogo from "../../../assets/VivuxeLogo.png";
-import { Button, Form } from "antd";
+import { Button, Dropdown, Form } from "antd";
 import { useState } from "react";
 import LoginModal from "../../../pages/Homepage/modal/LoginModal";
 import SignupModal from "../../../pages/Homepage/modal/SignupModal";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { logOut } from "../../helpers";
 
 const TopNav: React.FC = () => {
+  const nav = useNavigate();
+
   const [loginVisible, setLoginVisible] = useState(false);
   const [signupVisible, setSignupVisible] = useState(false);
 
-  const userFromLocalStorage = localStorage.getItem("username");
-
-  const nav = useNavigate();
+  const userInfo = localStorage.getItem("username");
 
   const handleLogoutClicked = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
+    logOut();
     nav("/");
-    toast.success("Dang xuat thanh cong");
   };
 
-  const userInfo = null;
-  // {
-  //   name: "admin",
-  //   /// ....
-  // };
+  const items = [
+    {
+      key: "1",
+      label: "My profile",
+      onClick: () => nav("/user"),
+    },
+    {
+      key: "2",
+      label: "Đăng xuất",
+      onClick: handleLogoutClicked,
+    },
+  ];
 
   return (
     <div className="vivu_layout">
@@ -40,14 +45,15 @@ const TopNav: React.FC = () => {
           <div className="menu_container">
             <a href="/#">Về VivuXe </a>
             <div className="vertical_line"></div>
-            {userFromLocalStorage ? (
-              <div>
-                <span className="info-username">
-                  Xin chào {userFromLocalStorage}{" "}
-                </span>
-                <Button type="primary" onClick={handleLogoutClicked}>
-                  Đăng xuất
-                </Button>
+            {userInfo ? (
+              <div className="user-info" style={{ cursor: "pointer" }}>
+                <Dropdown
+                  menu={{
+                    items,
+                  }}
+                >
+                  <span>Xin chào {userInfo}</span>
+                </Dropdown>
               </div>
             ) : (
               <>

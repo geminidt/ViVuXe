@@ -1,50 +1,61 @@
 import "./ProfileUpdateModal.scss";
 
-import React, { useState } from "react";
-import { Modal, Form, Input, Button } from "antd";
-// import BirthdatePicker from "../../../components/birthdatePicker";
+import { Modal, Form, Input, Button, DatePicker, Select } from "antd";
 import { toast } from "react-toastify";
+import userService from "../../../../common/api/userService";
+import { User } from "../..";
+import { useEffect } from "react";
+import { formatDate } from "../../../../common/helpers";
+import dayjs from "dayjs";
 
 interface ProfileUpdateModalProps {
   visible: boolean;
   onClose: () => void;
+  fetchUser: () => void;
+  user: User;
 }
-
-type Gender = "Nam" | "Nữ" | "Khác";
 
 const ProfileUpdateModal: React.FC<ProfileUpdateModalProps> = ({
   visible,
   onClose,
+  fetchUser,
+  user,
 }) => {
   const [form] = Form.useForm();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const profileUpdate = async (values: any) => {
     try {
-      console.log(values);
-      // await userService.updateUser(values);
-      toast.success("Dang ky thanh cong");
+      // values.dob = formatDate(values.dob, "YYYY-MM-DD");
+      await userService.updateUser(values);
+      fetchUser();
+      toast.success("Update thanh cong");
       onClose();
     } catch (error) {
-      toast.error("Dang ky that bai");
+      toast.error("Update that bai");
     }
   };
+
   const handleSubmit = () => {
     form
       .validateFields()
       .then((values) => {
         profileUpdate(values);
-        // form.resetFields();
+        form.resetFields();
       })
       .catch((error) => {
         console.error("Validation failed:", error);
       });
   };
 
-  const [gender, setGender] = useState<Gender>("Nam");
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setGender(event.target.value as Gender);
-  };
+  useEffect(() => {
+    if (Object.keys(user).length > 0) {
+      form.setFieldsValue({
+        ...user,
+        dob: dayjs(user.dob),
+      });
+    }
+  }, [user]);
 
   return (
     <Modal
@@ -57,51 +68,47 @@ const ProfileUpdateModal: React.FC<ProfileUpdateModalProps> = ({
         </Button>
       }
     >
-      <Form form={form} onFinish={handleSubmit}>
-        <p>Tên tài khoản </p>
+      <Form form={form} onFinish={handleSubmit} layout="vertical">
+        {/* <p>Tên tài khoản </p>
         <Form.Item
           name="username"
           rules={[
             {
-              required: true,
+              required: false,
               message: "Hãy nhập tên tài khoản!",
             },
           ]}
         >
           <Input />
-        </Form.Item>
+        </Form.Item> */}
 
-        <p>Ngày sinh: </p>
         <Form.Item
-          name="birth-of-date"
+          name="dob"
+          label="Ngày sinh"
           rules={[{ required: true, message: "Hãy nhập ngày sinh của bạn!" }]}
         >
-          {/* <BirthdatePicker /> */}
-          <div>
-            <Input type="date" />
-          </div>
+          <DatePicker
+            format={"DD/MM/YYYY"}
+            placeholder="Hãy nhập ngày sinh của bạn!"
+            style={{ width: "100%" }}
+          />
         </Form.Item>
 
-        <p>Giới tính </p>
         <Form.Item
           name="gender"
-          initialValue={gender}
+          label="Giới tính"
           rules={[{ required: true, message: "Hãy nhập giới tính của bạn!" }]}
         >
-          <div>
-            <label htmlFor="gender">Gender: </label>
-            <select id="gender" onChange={handleChange}>
-              <option value="Nam">Nam</option>
-              <option value="Nữ">Nữ</option>
-              <option value="Khác">Khác</option>
-            </select>
-            {/* <p>Selected gender: {gender}</p> */}
-          </div>
+          <Select allowClear>
+            <option value="Male">Nam</option>
+            <option value="Female">Nữ</option>
+            <option value="Other">Khác</option>
+          </Select>
         </Form.Item>
 
-        <p>Phone Number: </p>
         <Form.Item
           name="phone"
+          label="Số điện thoại"
           rules={[
             { required: true, message: "Hãy nhập số điện thoại của bạn!" },
           ]}
@@ -109,9 +116,9 @@ const ProfileUpdateModal: React.FC<ProfileUpdateModalProps> = ({
           <Input />
         </Form.Item>
 
-        <p>E-mail:</p>
         <Form.Item
           name="email"
+          label="E-mail"
           rules={[
             {
               type: "email",
@@ -126,9 +133,9 @@ const ProfileUpdateModal: React.FC<ProfileUpdateModalProps> = ({
           <Input />
         </Form.Item>
 
-        <p>Số GPLX: </p>
         <Form.Item
-          name="gplx"
+          name="driverLicense"
+          label="Số GPLX"
           rules={[{ required: true, message: "Hãy nhập số GPLX của bạn!" }]}
         >
           <Input />

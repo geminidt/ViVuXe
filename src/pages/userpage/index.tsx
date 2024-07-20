@@ -1,5 +1,5 @@
 import "./Userpage.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   UserOutlined,
   CarOutlined,
@@ -11,9 +11,12 @@ import {
   MoneyCollectOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Menu, Card, Form, Button, Input } from "antd";
+import { Menu, Card, Form, Button, Input, Row, Col } from "antd";
 import Goma from "../../assets/Goma.jpg";
-import ProfileUpdateModal from "./modal/profileUpdateModal";
+import ProfileUpdateModal from "../../pages/userpage/modal/profileUpdateModal";
+import userService from "../../common/api/userService";
+import { toast } from "react-toastify";
+import { formatDate, getUserId } from "../../common/helpers";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -35,18 +38,46 @@ const items: MenuItem[] = [
   { key: "8", icon: <LogoutOutlined />, label: "Đăng xuất" },
 ];
 
-const onFinish = (values: unknown) => {
-  console.log("Received values of form: ", values);
-};
+export interface User {
+  userId: number;
+  username: string;
+  dob: string;
+  gender: string;
+  phone: string;
+  email: string;
+  driverLicense: string;
+  createDate: string;
+}
 
 const Userpage = () => {
+  const userId = getUserId();
   const [profileUpdateVisible, setProfileUpdateVisible] = useState(false);
+  const [user, setUser] = useState<User>({} as User);
+
+  const fetchUser = async () => {
+    if (userId) {
+      try {
+        const { data } = await userService.getUserById(userId);
+        setUser(data);
+      } catch (err) {
+        toast.error("Error fetching rentals:");
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, [userId]);
+
+  const onFinish = (values: unknown) => {
+    console.log("Received values of form: ", values);
+  };
 
   return (
     <div className="main-container">
       <div className="menu-container">
         <div>
-          <p className="wellcome-title">Xin chào Goma!</p>
+          <p className="wellcome-title">Xin chào {user.username}!</p>
           <hr />
         </div>
         <div className="menu-content">
@@ -71,7 +102,7 @@ const Userpage = () => {
                     style={{
                       backgroundColor: "white",
                       color: "black",
-                      marginLeft: "320px",
+                      marginLeft: "250px",
                       border: "1px solid black",
                     }}
                   >
@@ -81,6 +112,8 @@ const Userpage = () => {
                   <ProfileUpdateModal
                     visible={profileUpdateVisible}
                     onClose={() => setProfileUpdateVisible(false)}
+                    fetchUser={fetchUser}
+                    user={user}
                   />
                 </span>
               </h2>
@@ -96,41 +129,42 @@ const Userpage = () => {
               />
               <br />
               <br />
-              <p style={{ fontSize: "25px", marginLeft: "60px" }}>Goma</p>
-              <p style={{ marginLeft: "25px" }}>Tham gia 12/06/2024</p>
+              <p style={{ fontSize: "25px", marginLeft: "60px" }}>
+                {user.username}
+              </p>
+              <p
+                style={{
+                  fontWeight: "400",
+                  fontSize: "18px",
+                }}
+              >
+                Tham gia ngày: {formatDate(user.createDate)}
+              </p>
             </div>
 
             <div className="info-right">
               <br />
               <Card
+                key={user.userId}
                 className="user-info"
                 style={{
                   backgroundColor: "#D9D9D9",
                 }}
               >
-                <p>
-                  Họ và tên{" "}
-                  <span style={{ marginLeft: "130px" }}>Nguyễn Văn A </span>
-                </p>
-                <p>
-                  Ngày sinh{" "}
-                  <span style={{ marginLeft: "150px" }}>--/--/---- </span>
-                </p>
-                <p>
-                  Giới tính <span style={{ marginLeft: "180px" }}>Nam</span>
-                </p>
-                <p>
-                  Số điện thoại{" "}
-                  <span style={{ marginLeft: "120px" }}>0123456789</span>
-                </p>
-                <p>
-                  Email{" "}
-                  <span style={{ marginLeft: "150px" }}>abc@gmail.com</span>
-                </p>
-                <p>
-                  Số GPLX{" "}
-                  <span style={{ marginLeft: "140px" }}>12031ABC12312</span>
-                </p>
+                <Row>
+                  <Col span={8}>Họ và tên:</Col>
+                  <Col span={16}>{user.username}</Col>
+                  <Col span={8}>Ngày sinh:</Col>
+                  <Col span={16}>{formatDate(user.dob)}</Col>
+                  <Col span={8}>Giới tính:</Col>
+                  <Col span={16}>{user.gender}</Col>
+                  <Col span={8}>Số điện thoại:</Col>
+                  <Col span={16}>{user.phone}</Col>
+                  <Col span={8}>Email:</Col>
+                  <Col span={16}>{user.email}</Col>
+                  <Col span={8}>Số GPLX:</Col>
+                  <Col span={16}>{user.driverLicense}</Col>
+                </Row>
               </Card>
             </div>
           </Card>
@@ -143,13 +177,7 @@ const Userpage = () => {
             </div>
 
             <div className="change-pass-input">
-              <Form
-                className="change-pass-form"
-                initialValues={{
-                  remember: true,
-                }}
-                onFinish={onFinish}
-              >
+              <Form className="change-pass-form" onFinish={onFinish}>
                 <p>Mật khẩu hiện tại</p>
                 <Form.Item
                   name="now-pass"
