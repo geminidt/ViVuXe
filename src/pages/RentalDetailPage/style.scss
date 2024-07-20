@@ -130,6 +130,24 @@ h3{
     .item-info-right {
         border-radius: 10px;
 
+        .item-info-right-title{
+            font-family: 'Quicksand', sans-serif;
+            font-size: 25px;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        .item-info-row{
+            
+        }
+
+        .item-info-1{
+            font-family: 'Quicksand', sans-serif;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 500;
+        }
+
         .price-detail {
             color: #000;
             font-family: Inter;

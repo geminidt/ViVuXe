@@ -96,9 +96,32 @@ const RentalDetailPage: React.FC = () => {
           <Col span={8}>
             <Card bordered={false}>
               <div className="rental-content-right">
-                <div className="item-info-right"></div>
+                <div className="item-info-right">
+                  <p className="item-info-right-title">Chủ xe</p>
+                  <div>
+                    <p className="item-info-1">Nguyễn Văn Tài</p>
+                  </div>
 
-                <hr className="content_nav-hr" />
+                  <p className="item-info-right-title">Địa chỉ giao nhận xe</p>
+                  <p className="item-info-1">{rental.carResponse.address}</p>
+
+                  <hr className="content_nav-hr" />
+
+                  <p className="item-info-right-title">Bảng tính giá thuê</p>
+                  <div className="item-info-row">
+                    <p className="item-info-1">Đơn giá thuê</p>
+                    <p className="item-info-1">
+                      {rental.carResponse.cost} đ/ ngày
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="item-info-1">Tổng cộng</p>
+                    <p className="item-info-1">{rental.carResponse.cost} đ</p>
+                  </div>
+
+                  <hr className="content_nav-hr" />
+                </div>
               </div>
             </Card>
 
