@@ -24,20 +24,18 @@ const createRental = (
 };
 
 const getRental = (page: number, size: number) => {
-  return axiosClient.get(`${BASE_URL}?page=${page}&size=${size}`, {
-    headers: getHeaderWithToken(),
-  });
+  return axiosClient.get(`${BASE_URL}?page=${page}&size=${size}`);
+};
+
+const getRentalById = (id: number) => {
+  return axiosClient.get(`${BASE_URL}/${id}`);
 };
 
 const deleteRental = (id: number) => {
   return axiosClient.get(`${BASE_URL}/deleteRental/${id}`);
 };
 
-const getRentalById = (id: number) => {
-  return axiosClient.get(`${BASE_URL}/getRentalById/${id}`);
-};
-
-const boardService = {
+const rentalService = {
   getRentalPaging,
   createRental,
   getRental,
@@ -45,4 +43,4 @@ const boardService = {
   getRentalById,
 };
 
-export default boardService;
+export default rentalService;

@@ -130,6 +130,25 @@ h3{
     .item-info-right {
         border-radius: 10px;
 
+        .item-info-right-title{
+            font-family: 'Quicksand', sans-serif;
+            font-size: 25px;
+            font-style: normal;
+            font-weight: 650;
+        }
+
+        .item-info-row{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .item-info-1{
+            font-family: 'Quicksand', sans-serif;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+        }
+
         .price-detail {
             color: #000;
             font-family: Inter;
@@ -143,7 +162,7 @@ h3{
         .info-right-hr {
             background: #8D8D8D;
             height: 1px;
-            margin: 14px 0;
+            margin: 10px 0;
         }
 
         .total_money {
@@ -209,7 +228,7 @@ h3{
             font-family: Inter;
             font-size: 20px;
             font-style: normal;
-            font-weight: 400;
+            font-weight: 600;
             line-height: normal;
             margin-left: -8px;
         }

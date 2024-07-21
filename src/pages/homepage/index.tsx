@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SearchBox from "../../common/components/ImageBox/seachBox";
-import { List, Space } from "antd";
+import { Space } from "antd";
 import "./Homepage.scss";
 import { Card } from "antd";
 import TPHCM from "../../assets/TPHCM.jpg";

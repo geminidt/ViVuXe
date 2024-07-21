@@ -1,14 +1,26 @@
 import "./style.scss";
 
-import { CalendarOutlined, DollarOutlined } from "@ant-design/icons";
+import {
+  CalendarOutlined,
+  CarOutlined,
+  DollarOutlined,
+  FormOutlined,
+  LockOutlined,
+  LogoutOutlined,
+  MoneyCollectOutlined,
+  RestOutlined,
+  ScheduleOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import rentalService from "../../common/api/rentalService";
+import { Menu, MenuProps } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const RentalPage: React.FC = () => {
   interface Rental {
     carResponse: CarResponse;
     rentalId: number;
-    carName: string;
     rentalDate: string;
     rentalReturn: string;
     totalCost: number;
@@ -16,32 +28,38 @@ const RentalPage: React.FC = () => {
   }
 
   interface CarResponse {
+    make: string;
+    model: string;
+    address: string;
+    year: number;
     name: string;
     cost: number;
   }
 
-  // const rentals : Rental[] = [
-  //     {
-  //         rentalId: 1,
-  //         carName: "VINFAST VF6 PLUS 2023",
-  //         rentalDate: "13-6-2024" ,
-  //         rentalReturn: "14-6-2024",
-  //         totalCost: 1100000,
-  //         image: anh1
-  //     },
-  //     {
-  //         rentalId: 2,
-  //         carName: "TOYOTA VELOZ CROSS 2022",
-  //         rentalDate: "17-6-2024" ,
-  //         rentalReturn: "18-6-2024",
-  //         totalCost: 900000,
-  //         image: anh2
-  //     }
-  // ]
+  type MenuItem = Required<MenuProps>["items"][number];
+
+  const items: MenuItem[] = [
+    { key: "1", icon: <UserOutlined />, label: "Tài khoản của tôi" },
+    {
+      key: "sub1",
+      label: "Xe của tôi",
+      icon: <CarOutlined />,
+      children: [
+        { key: "2", icon: <CarOutlined />, label: "Danh sách xe" },
+        { key: "3", icon: <MoneyCollectOutlined />, label: "Ví của tôi" },
+        { key: "4", icon: <FormOutlined />, label: "Đăng ký xe" },
+      ],
+    },
+    { key: "5", icon: <ScheduleOutlined />, label: "Chuyến của tôi" },
+    { key: "6", icon: <LockOutlined />, label: "Đổi mật khẩu" },
+    { key: "7", icon: <RestOutlined />, label: "Yêu cầu xoá tài khoản" },
+    { key: "8", icon: <LogoutOutlined />, label: "Đăng xuất" },
+  ];
 
   const size = 8;
   const [page, setPage] = useState(1);
   const [allRentals, setAllRentals] = useState<Rental[]>([]);
+  const nav = useNavigate();
 
   const fetchRental = async () => {
     try {
@@ -61,16 +79,38 @@ const RentalPage: React.FC = () => {
   const path = "anh1.png"; // rental.imagePath
 
   return (
-    <div>
+    <div className="main-container">
+      <div className="menu-container">
+        {/* <div>
+          <p className="wellcome-title">Xin chào {user.username}!</p>
+          <hr />
+        </div> */}
+        <div className="menu-content">
+          <Menu
+            style={{ backgroundColor: "#e0f4ff" }}
+            defaultSelectedKeys={["1"]}
+            mode="inline"
+            items={items}
+          />
+        </div>
+      </div>
+
       <div className="trip-grid">
         <h1>Chuyến của tôi</h1>
         {allRentals.map((rental) => (
-          <div key={rental.rentalId} className="rental-card">
+          <div
+            key={rental.rentalId}
+            className="rental-card"
+            onClick={() => nav(`/rental/${rental.rentalId}`)}
+          >
             <div className="rental-image">
               <img src={`${window.location.origin}/${path}`} alt="" />
             </div>
             <div className="rental-info">
-              <h3>{rental.carResponse.name}</h3>
+              <h3>
+                {rental.carResponse.make} {rental.carResponse.model}{" "}
+                {rental.carResponse.year}
+              </h3>
               <div className="row">
                 <CalendarOutlined />
                 <p className="info">Bắt đầu: {rental.rentalDate}</p>
