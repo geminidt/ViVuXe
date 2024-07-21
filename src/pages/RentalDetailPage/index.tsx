@@ -1,13 +1,15 @@
-import { Card, Col, Row } from "antd";
+import { Card, Col, Menu, Row } from "antd";
 import "./style.scss";
 import anh1 from "../../assets/anh1.png";
 import { CalendarOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
+import rentalService from "../../common/api/rentalService";
+import { useParams } from "react-router-dom";
 
 const RentalDetailPage: React.FC = () => {
   interface Rental {
     carResponse: CarResponse;
     rentalId: number;
-    carName: string;
     rentalDate: string;
     rentalReturn: string;
     totalCost: number;
@@ -15,30 +17,49 @@ const RentalDetailPage: React.FC = () => {
   }
 
   interface CarResponse {
+    make: string;
+    model: string;
+    address: string;
+    year: number;
     name: string;
     cost: number;
-    address: string;
   }
 
-  const rentals: Rental[] = [
-    {
-      rentalId: 1,
-      carName: "VINFAST VF6 PLUS 2023",
-      rentalDate: "13-6-2024",
-      rentalReturn: "14-6-2024",
-      totalCost: 1100000,
-      image: anh1,
-      carResponse: {
-        name: "VINFAST VF6 PLUS 2023",
-        cost: 1100000,
-        address: "Quan Dong Da, Ha Noi",
-      },
-    },
-  ];
+  const { id }: any = useParams();
+  const [rental, setRental] = useState<Rental>({} as Rental);
+
+  const fetchRentalDetail = async () => {
+    try {
+      const { data } = await rentalService.getRentalById(id);
+      setRental(data);
+    } catch (err) {
+      console.error("Error fetching rentals:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchRentalDetail();
+  }, [id]);
+
+  // const rentals: Rental[] = [
+  //   {
+  //     rentalId: 1,
+  //     carName: "VINFAST VF6 PLUS 2023",
+  //     rentalDate: "13-6-2024",
+  //     rentalReturn: "14-6-2024",
+  //     totalCost: 1100000,
+  //     image: anh1,
+  //     carResponse: {
+  //       name: "VINFAST VF6 PLUS 2023",
+  //       cost: 1100000,
+  //       address: "Quan Dong Da, Ha Noi",
+  //     },
+  //   },
+  // ];
 
   return (
-    <div className="rental-detail">
-      {rentals.map((rental) => (
+    <div>
+      <div className="rental-detail">
         <Row>
           <Col span={14}>
             <Card bordered={false}>
@@ -47,8 +68,11 @@ const RentalDetailPage: React.FC = () => {
                   <img src={anh1} alt="" />
                 </div>
                 <div className="info">
-                  <h2>{rental.carResponse.name}</h2>
-                  <h3>{rental.carResponse.address}</h3>
+                  <h2>
+                    {rental.carResponse?.make} {rental.carResponse?.model}{" "}
+                    {rental.carResponse?.year}
+                  </h2>
+                  <h3>{rental.carResponse?.address}</h3>
                 </div>
               </div>
 
@@ -102,8 +126,10 @@ const RentalDetailPage: React.FC = () => {
                     <p className="item-info-1">Nguyễn Văn Tài</p>
                   </div>
 
+                  <br />
+
                   <p className="item-info-right-title">Địa chỉ giao nhận xe</p>
-                  <p className="item-info-1">{rental.carResponse.address}</p>
+                  <p className="item-info-1">{rental.carResponse?.address}</p>
 
                   <hr className="content_nav-hr" />
 
@@ -111,13 +137,13 @@ const RentalDetailPage: React.FC = () => {
                   <div className="item-info-row">
                     <p className="item-info-1">Đơn giá thuê</p>
                     <p className="item-info-1">
-                      {rental.carResponse.cost} đ/ ngày
+                      {rental.carResponse?.cost} đ/ ngày
                     </p>
                   </div>
 
-                  <div>
+                  <div className="item-info-row">
                     <p className="item-info-1">Tổng cộng</p>
-                    <p className="item-info-1">{rental.carResponse.cost} đ</p>
+                    <p className="item-info-1">{rental.carResponse?.cost} đ</p>
                   </div>
 
                   <hr className="content_nav-hr" />
@@ -182,7 +208,7 @@ const RentalDetailPage: React.FC = () => {
             </Card>
           </Col>
         </Row>
-      ))}
+      </div>
     </div>
   );
 };
