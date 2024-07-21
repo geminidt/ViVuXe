@@ -19,6 +19,8 @@ import { GiFlatTire, GiTripleGate } from "react-icons/gi";
 import { CgUsb } from "react-icons/cg";
 import { LuMonitorPlay } from "react-icons/lu";
 import { FaCarBurst } from "react-icons/fa6";
+import carService from "../../common/api/carService";
+import { toast } from "react-toastify";
 
 interface ToggleButton {
   id: string;
@@ -119,6 +121,40 @@ const toggleButtons: ToggleButton[] = [
   },
 ];
 
+export interface Car {
+  carId: number,
+  licensePlate: string,
+  cost: number,
+  createDate: string,
+  address: string,
+  make: string,
+  model: string,
+  seat: number,
+  year: number,
+  transmission: string,
+  fuel: string,
+  bluetooth: boolean,
+  map: boolean,
+  tireSensor: boolean,
+  collisionSensor: boolean,
+  speedWarning: boolean,
+  truckCover: boolean,
+  camera360: boolean,
+  sideCamera: boolean,
+  dashCamera: boolean,
+  rearCamera: boolean,
+  gps: boolean,
+  childSeat: boolean,
+  usb: boolean,
+  spareTire: boolean,
+  dvdScreen: boolean,
+  etc: boolean,
+  airbags: boolean,
+  status: string,
+  description: string
+}
+
+
 const CarRegister = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [preview, setPreview] = useState<string[]>([]);
@@ -166,6 +202,17 @@ const CarRegister = () => {
     };
     console.log("Received values of form: ", body);
     // call API here
+    fetchCar(body);
+  };
+
+  const fetchCar = async (values: unknown) => {
+      try {
+        await carService.createCar(values);
+        fetchCar(values);
+        toast.success("Đăng ký xe thành công");
+      } catch (err) {
+        toast.error("Đăng ký xe thất bại");
+      }
   };
 
   return (

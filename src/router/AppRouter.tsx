@@ -8,6 +8,7 @@ import RentalPage from "../pages/RentalPage";
 import RentalDetailPage from "../pages/RentalDetailPage";
 import CarRegister from "../pages/carRegister";
 import Userpage from "../pages/userpage";
+import CarDetail from "../pages/Car Detail/CarDetail";
 
 interface RouteObject {
   path: string;
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/user",
         element: <Userpage />,
+      },
+      {
+        path: "/cardetail",
+        element: <CarDetail />,
       },
     ],
   },
