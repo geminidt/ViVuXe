@@ -61,32 +61,30 @@ const RentalPage: React.FC = () => {
   const path = "anh1.png"; // rental.imagePath
 
   return (
-    <div>
-      <div className="trip-grid">
-        <h1>Chuyến của tôi</h1>
-        {allRentals.map((rental) => (
-          <div key={rental.rentalId} className="rental-card">
-            <div className="rental-image">
-              <img src={`${window.location.origin}/${path}`} alt="" />
+    <div className="trip-grid">
+      <h1>Chuyến của tôi</h1>
+      {allRentals.map((rental) => (
+        <div key={rental.rentalId} className="rental-card">
+          <div className="rental-image">
+            <img src={`${window.location.origin}/${path}`} alt="" />
+          </div>
+          <div className="rental-info">
+            <h3>{rental.carResponse.name}</h3>
+            <div className="row">
+              <CalendarOutlined />
+              <p className="info">Bắt đầu: {rental.rentalDate}</p>
             </div>
-            <div className="rental-info">
-              <h3>{rental.carResponse.name}</h3>
-              <div className="row">
-                <CalendarOutlined />
-                <p className="info">Bắt đầu: {rental.rentalDate}</p>
-              </div>
-              <div className="row">
-                <CalendarOutlined />
-                <p className="info">Kết thúc: {rental.rentalReturn}</p>
-              </div>
-              <div className="row">
-                <DollarOutlined />
-                <p className="info">Tổng tiền: {rental.carResponse.cost}</p>
-              </div>
+            <div className="row">
+              <CalendarOutlined />
+              <p className="info">Kết thúc: {rental.rentalReturn}</p>
+            </div>
+            <div className="row">
+              <DollarOutlined />
+              <p className="info">Tổng tiền: {rental.carResponse.cost}</p>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 };

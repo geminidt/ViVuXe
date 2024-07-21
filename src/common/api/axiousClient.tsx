@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getToken, logOut } from "../helpers";
 
-const BASE_HOST = "http://localhost:8080";
+export const BASE_HOST = "http://localhost:8080";
 
 const axiosClient = axios.create({
   baseURL: BASE_HOST,

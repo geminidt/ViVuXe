@@ -9,6 +9,7 @@ import RentalDetailPage from "../pages/RentalDetailPage";
 import CarRegister from "../pages/carRegister";
 import Userpage from "../pages/userpage";
 import CarDetail from "../pages/Car Detail/CarDetail";
+import DashboardLayout from "../layout/DashboardLayout";
 
 interface RouteObject {
   path: string;
@@ -30,10 +31,6 @@ const router = createBrowserRouter([
         element: <AboutCarRentalPerson />,
       },
       {
-        path: "/rental",
-        element: <RentalPage />,
-      },
-      {
         path: "/rental/detail",
         element: <RentalDetailPage />,
       },
@@ -43,7 +40,17 @@ const router = createBrowserRouter([
       },
       {
         path: "/user",
-        element: <Userpage />,
+        element: <DashboardLayout />,
+        children: [
+          {
+            index: true,
+            element: <Userpage />,
+          },
+          {
+            path: "rental",
+            element: <RentalPage />,
+          },
+        ],
       },
       {
         path: "/cardetail/:id",

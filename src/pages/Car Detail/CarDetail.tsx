@@ -9,13 +9,12 @@ import Modal from "./Modal";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import carService from "../../common/api/carService";
+import { Car } from "../carRegister";
+import { getImageUrl } from "../../common/helpers";
 
 const CarDetail = () => {
   const { id } = useParams();
-  const [car, setCar] = useState<any>({});
-
-  const mainImage = "/images/anh1.png";
-  const images = ["/images/anh2.png", "/images/anh3.png", "/images/anh4.png"];
+  const [car, setCar] = useState<Car>({} as Car);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -43,19 +42,30 @@ const CarDetail = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  console.log(car);
+  console.log(
+    car?.imageDTOS?.length ? getImageUrl(car.imageDTOS[0]?.carImagePath) : ""
+  );
+
+  const imagesShow = car.imageDTOS?.slice(1, 4) ?? [];
 
   return (
     <div>
       <div className="car-gallery">
         <div className="car-gallery-main">
-          <CarImage src={mainImage} alt="Main car image" />
+          <CarImage
+            src={
+              car?.imageDTOS?.length
+                ? getImageUrl(car.imageDTOS[0]?.carImagePath)
+                : ""
+            }
+            alt="Main car image"
+          />
         </div>
         <div className="car-gallery-thumbnails">
-          {images.map((src, index) => (
+          {imagesShow.map((item, index) => (
             <CarImage
               key={index}
-              src={src}
+              src={getImageUrl(item.carImagePath)}
               alt={`Car thumbnail ${index + 1}`}
             />
           ))}
@@ -126,7 +136,7 @@ const CarDetail = () => {
           <hr className="content_nav-hr" />
           <div className="content-section">
             <p className="content-section-title">Các tiện nghi khác</p>
-            <Features />
+            <Features car={car} />
           </div>
           <hr className="content_nav-hr" />
           <div className="content-section">
