@@ -21,6 +21,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({
 
   return (
     <button
+    type="button"
       onClick={handleToggle}
       style={{
         width: "250px",

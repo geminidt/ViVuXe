@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import "./CarRegister.scss";
 import { LeftOutlined } from "@ant-design/icons";
@@ -21,6 +22,7 @@ import { LuMonitorPlay } from "react-icons/lu";
 import { FaCarBurst } from "react-icons/fa6";
 import carService from "../../common/api/carService";
 import { toast } from "react-toastify";
+import { BiKey } from "react-icons/bi";
 
 interface ToggleButton {
   id: string;
@@ -122,57 +124,62 @@ const toggleButtons: ToggleButton[] = [
 ];
 
 export interface Car {
-  carId: number,
-  licensePlate: string,
-  cost: number,
-  createDate: string,
-  address: string,
-  make: string,
-  model: string,
-  seat: number,
-  year: number,
-  transmission: string,
-  fuel: string,
-  bluetooth: boolean,
-  map: boolean,
-  tireSensor: boolean,
-  collisionSensor: boolean,
-  speedWarning: boolean,
-  truckCover: boolean,
-  camera360: boolean,
-  sideCamera: boolean,
-  dashCamera: boolean,
-  rearCamera: boolean,
-  gps: boolean,
-  childSeat: boolean,
-  usb: boolean,
-  spareTire: boolean,
-  dvdScreen: boolean,
-  etc: boolean,
-  airbags: boolean,
-  status: string,
-  description: string
+  carId: number;
+  licensePlate: string;
+  cost: number;
+  createDate: string;
+  address: string;
+  make: string;
+  model: string;
+  seat: number;
+  year: number;
+  transmission: string;
+  fuel: string;
+  bluetooth: boolean;
+  map: boolean;
+  tireSensor: boolean;
+  collisionSensor: boolean;
+  speedWarning: boolean;
+  truckCover: boolean;
+  camera360: boolean;
+  sideCamera: boolean;
+  dashCamera: boolean;
+  rearCamera: boolean;
+  gps: boolean;
+  childSeat: boolean;
+  usb: boolean;
+  spareTire: boolean;
+  dvdScreen: boolean;
+  etc: boolean;
+  airbags: boolean;
+  status: string;
+  description: string;
 }
-
 
 const CarRegister = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [preview, setPreview] = useState<string[]>([]);
-  const [featureList, setFeatureList] = useState<string[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [featureList, setFeatureList] = useState<any>({});
 
   const handleToggle = (isOn: boolean, id: string) => {
     console.log(isOn, id);
-    // kiểm tra xem isOn là true và id chưa có trong mảng featureList
-    if (isOn && !featureList.includes(id)) {
-      const newFeatureList = [...featureList]; // copy ra 1 mảng mới
-      newFeatureList.push(id); // thêm id vào cuối mảng
-      setFeatureList(newFeatureList); // set lại dữ liệu
-    }
+    const newFeatureList = {
+      ...featureList,
+      [id]: isOn,
+    };
+    setFeatureList(newFeatureList);
+    // // kiểm tra xem isOn là true và id chưa có trong mảng featureList
+    // if (isOn && !featureList.includes(id)) {
+    //   const newFeatureList = [...featureList]; // copy ra 1 mảng mới
+    //   newFeatureList.push(id); // thêm id vào cuối mảng
+    //   setFeatureList(newFeatureList); // set lại dữ liệu
+    // }
 
-    if (!isOn) {
-      const newFeatureList = featureList.filter((item) => item !== id);
-      setFeatureList(newFeatureList); // set lại dữ liệu
-    }
+    // if (!isOn) {
+    //   const newFeatureList = featureList.filter((item) => item !== id);
+    //   setFeatureList(newFeatureList); // set lại dữ liệu
+    // }
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -197,22 +204,32 @@ const CarRegister = () => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       ...values,
-      imagePath: selectedFiles.map((item) => item.name),
-      featureList: featureList,
+      images: selectedFiles,
+      ...featureList,
     };
-    console.log("Received values of form: ", body);
+    delete body.image;
+    delete body.feature;
     // call API here
-    fetchCar(body);
+    createCar(body);
   };
 
-  const fetchCar = async (values: unknown) => {
-      try {
-        await carService.createCar(values);
-        fetchCar(values);
-        toast.success("Đăng ký xe thành công");
-      } catch (err) {
-        toast.error("Đăng ký xe thất bại");
+  const createCar = async (values: any) => {
+    try {
+      const formData = new FormData();
+      for (const key in values) {
+        if (key === "images") {
+          values.images.forEach((item: any) => {
+            formData.append("images", item);
+          });
+        } else {
+          formData.append(key, values[key]);
+        }
       }
+      await carService.createCar(formData);
+      toast.success("Đăng ký xe thành công");
+    } catch (err) {
+      toast.error("Đăng ký xe thất bại");
+    }
   };
 
   return (
@@ -239,13 +256,7 @@ const CarRegister = () => {
       <div className="carregister-card">
         <Card style={{ width: 850, height: 1800 }}>
           <div className="carregister-input">
-            <Form
-              className="carregister-form"
-              initialValues={{
-                remember: true,
-              }}
-              onFinish={onFinish}
-            >
+            <Form className="carregister-form" onFinish={onFinish}>
               <h2>Biển số xe</h2>
 
               <div className="warning">

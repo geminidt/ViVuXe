@@ -1,11 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-irregular-whitespace */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./CarDetail.scss";
 import Features from "./Features";
 import RentalForm from "./RentalForm";
 import CarImage from "./CarImage";
 import Modal from "./Modal";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import carService from "../../common/api/carService";
+
 const CarDetail = () => {
+  const { id } = useParams();
+  const [car, setCar] = useState<any>({});
+
   const mainImage = "/images/anh1.png";
   const images = ["/images/anh2.png", "/images/anh3.png", "/images/anh4.png"];
 
@@ -18,6 +26,25 @@ const CarDetail = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  const getCarDetail = async () => {
+    if (id) {
+      try {
+        const { data } = await carService.getCarById(Number(id));
+        setCar(data);
+      } catch (err) {
+        toast.error("Error fetching rentals:");
+      }
+    }
+  };
+
+  useEffect(() => {
+    getCarDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
+  console.log(car);
+
   return (
     <div>
       <div className="car-gallery">
@@ -41,7 +68,7 @@ const CarDetail = () => {
 
       <div className="car-content">
         <div className="car-content-main">
-          <p className="car-title">HYUNDAI SANTAFE 2018</p>
+          <p className="car-title">{car.model}</p>
           <ul className="content__nav-list">
             <li className="content__nav-item">
               <a href="#" className="content__nav-link">
@@ -94,14 +121,7 @@ const CarDetail = () => {
           <hr className="content_nav-hr" />
           <div className="content-section">
             <p className="content-section-title">Mô tả</p>
-            <p className="content-section-des">
-              HYUNDAI SANTAFE (AT) số tự động đăng ký tháng 06/2018.Xe gia đình
-              mới đẹp, nội thất nguyên bản, sạch sẽ, bảo dưỡng thường xuyên, rửa
-              xe miễn phí cho khách.Xe rộng rãi, an toàn, tiện nghi, phù hợp cho
-              gia đình du lịch.Xe trang bị hệ thống cảm biến lùi, gạt mưa tự
-              động, đèn pha tự động, camera hành trình, hệ thống giải trí AV
-              cùng nhiều tiện nghi khác…
-            </p>
+            <p className="content-section-des">{car.description}</p>
           </div>
           <hr className="content_nav-hr" />
           <div className="content-section">

@@ -9,75 +9,14 @@ const getCarPaging = (page: number, size: number) => {
   });
 };
 
-// const createCar = (
-//   carId: number,
-//   // licensePlate: string,
-//   cost: number,
-//   createDate: string,
-//   address: string,
-//   make: string,
-//   model: string,
-//   seat: number,
-//   year: number,
-//   transmission: string,
-//   fuel: string,
-//   bluetooth: boolean,
-//   map: boolean,
-//   tireSensor: boolean,
-//   collisionSensor: boolean,
-//   speedWarning: boolean,
-//   truckCover: boolean,
-//   camera360: boolean,
-//   sideCamera: boolean,
-//   dashCamera: boolean,
-//   rearCamera: boolean,
-//   gps: boolean,
-//   childSeat: boolean,
-//   usb: boolean,
-//   spareTire: boolean,
-//   dvdScreen: boolean,
-//   etc: boolean,
-//   airbags: boolean,
-//   status: string,
-//   description: string
-// ) => {
-//   return axiosClient.post(`${BASE_URL}/create-car`, {
-//     carId,
-//     // licensePlate,
-//     cost,
-//     createDate,
-//     address,
-//     make,
-//     model,
-//     seat,
-//     year,
-//     transmission,
-//     fuel,
-//     bluetooth,
-//     map,
-//     tireSensor,
-//     collisionSensor,
-//     speedWarning,
-//     truckCover,
-//     camera360,
-//     sideCamera,
-//     dashCamera,
-//     rearCamera,
-//     gps,
-//     childSeat,
-//     usb,
-//     spareTire,
-//     dvdScreen,
-//     etc,
-//     airbags,
-//     status,
-//     description,
-//   });
-// };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createCar = (body: any) => {
-  return axiosClient.post(`${BASE_URL}`, body)
+  return axiosClient.post(`${BASE_URL}`, body, {
+    headers: {
+      'Content-Type' : 'multipart/form-data'
+    }
+  })
 }
 
 const getCar = (page: number, size: number) => {

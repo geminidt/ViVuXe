@@ -34,7 +34,7 @@ axiosClient.interceptors.response.use(
     return response;
   },
   function (error) {
-    if (error.response.status === 403) {
+    if (error.response.status === 401) {
       logOut();
       window.location.href = "/";
     }
